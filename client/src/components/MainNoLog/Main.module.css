@@ -1,0 +1,29 @@
+.main {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.gif {
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  top: 50%;
+  margin: auto;
+  max-width: 1300px;
+}
+.btn {
+  padding: 15px 30px;
+  font-size: 20px;
+  background-color: rgb(250, 177, 93);
+  border-radius: 7px;
+  text-decoration: none;
+  color: black;
+  transition: all 0.5s;
+}
+.btn:hover {
+  color: black;
+  scale: 1.1;
+}
+.back {
+  
+}
