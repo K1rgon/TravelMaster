@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Comment extends Model {
     /**
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Comment.init({
     text: DataTypes.TEXT,
     user_id: DataTypes.INTEGER,
-    route_id: DataTypes.INTEGER
+    route_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Comment',
