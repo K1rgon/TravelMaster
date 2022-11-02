@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+// import Video from './components/Video/Video';
 import Main from './pages/main/Main';
 import Profile from './pages/profile/Profile';
 import LoginPage from './pages/login/Login';
