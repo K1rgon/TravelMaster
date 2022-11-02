@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
+import Video from './components/Video/Video';
 
 function App() {
   return (
-    <div>App</div>
+    <Video />
   );
 }
 
