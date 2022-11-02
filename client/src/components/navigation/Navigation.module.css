@@ -1,0 +1,26 @@
+.navigation {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: rgb(250, 177, 93);
+}
+.logo {
+  font-size: 28px;
+}
+.links {
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+}
+.link {
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.5s;
+  color: black;
+}
+.link:hover {
+  scale: 1.1;
+  color: black;
+}
