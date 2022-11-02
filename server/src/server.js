@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
@@ -10,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-
+const userRouter = require('./routes/userRouter');
 
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 app.use(express.urlencoded({ extended: true }));
@@ -30,5 +29,7 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+
+app.use('/user', userRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
