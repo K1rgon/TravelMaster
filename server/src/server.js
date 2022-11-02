@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const userRouter = require('./routes/userRouter');
-g
+
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
