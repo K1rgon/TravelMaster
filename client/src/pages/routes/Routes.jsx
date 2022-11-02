@@ -1,12 +1,12 @@
 import React from 'react';
 import Navigation from '../../components/navigation/Navigation';
-import Personal from '../../components/personas/Personal';
+import Rout from '../../components/routes/Rout';
 
-export default function Profile() {
+export default function Routers() {
   return (
     <div>
       <Navigation />
-      <Personal />
+      <Rout />
     </div>
   );
 }

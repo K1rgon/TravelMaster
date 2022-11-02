@@ -1,12 +1,12 @@
 import React from 'react';
 import Navigation from '../../components/navigation/Navigation';
-import Personal from '../../components/personas/Personal';
+import UserRoutes from '../../components/routes/UserRoutes';
 
-export default function Profile() {
+export default function PersonalRoutes() {
   return (
     <div>
       <Navigation />
-      <Personal />
+      <UserRoutes />
     </div>
   );
 }
