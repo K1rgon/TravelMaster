@@ -1,16 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../store/user/actions';
 import style from './Navigation.module.css';
 
 export default function Navigation() {
-  const login = false;
+  // const login = false;
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    const res = await fetch('http://localhost:3001/user/logout', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(res.status);
+    dispatch(logout());
+    navigate('/');
+  };
+
   return (
     <div className={style.navigation}>
       <div className={style.logo}>
         TRAVELMASTER
       </div>
       <div>
-        {login === true
+        {user.login
           ? (
             <ul className={style.links}>
               <li>
@@ -23,7 +41,7 @@ export default function Navigation() {
                 <Link className={style.link} to="/profile">Личный кабинет</Link>
               </li>
               <li>
-                <Link className={style.link} to="/logout">Выйти</Link>
+                <Link className={style.link} onClick={handleLogout} to="/logout">Выйти</Link>
               </li>
             </ul>
           )
