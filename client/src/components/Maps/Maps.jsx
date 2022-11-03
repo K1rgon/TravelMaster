@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-shadow */
+/* eslint-disable no-undef */
 import {
   Box,
   Button,
@@ -10,7 +14,6 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { FaLocationArrow, FaTimes } from 'react-icons/fa';
-
 import {
   useJsApiLoader,
   GoogleMap as Map,
@@ -22,7 +25,7 @@ import React, { useRef, useState } from 'react';
 
 const center = { lat: 48.8584, lng: 2.2945 };
 
-function App() {
+function Maps() {
   const [libraries] = useState(['places']);
 
   const { isLoaded } = useJsApiLoader({
@@ -44,10 +47,8 @@ function App() {
   }
 
   async function calculateRoute() {
-    // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
 
-    // const pointsArr = points.map((point, i)=> ({location: point[i + 1], stopover: false}));
     const waypoints = [];
     points.map((point) => waypoints.push({ location: point, stopover: false }));
 
@@ -56,9 +57,6 @@ function App() {
         origin: points[0],
         destination: points[points.length - 1],
         waypoints,
-        // waypoints: points.map((point, i)=> ({location: point[i + 1], stopover: false})).pop(),
-        // waypoints: [{ location: points[1], stopover: false }],
-        // eslint-disable-next-line no-undef
         travelMode: google.maps.TravelMode.DRIVING,
       });
       setDirectionsResponse(results);
@@ -68,7 +66,6 @@ function App() {
       const results = await directionsService.route({
         origin: originRef.current.value,
         destination: destiantionRef.current.value,
-        // eslint-disable-next-line no-undef
         travelMode: google.maps.TravelMode.DRIVING,
       });
       setDirectionsResponse(results);
@@ -105,19 +102,19 @@ function App() {
           zoom={15}
           onClick={onClick}
           mapContainerStyle={{ width: '100%', height: '100%' }}
-            // options={{
-            //   zoomControl: false,
-            //   streetViewControl: false,
-            //   mapTypeControl: false,
-            //   fullscreenControl: false,
-            // }}
+          // options={{
+          //   zoomControl: false,
+          //   streetViewControl: false,
+          //   mapTypeControl: false,
+          //   fullscreenControl: false,
+          // }}
           onLoad={(map) => setMap(map)}
         >
           {points.map((latLng, i) => (
             <Marker key={i} position={latLng} />
           ))}
           {directionsResponse && (
-          <DirectionsRenderer directions={directionsResponse} />
+            <DirectionsRenderer directions={directionsResponse} />
           )}
         </Map>
       </Box>
@@ -189,4 +186,4 @@ function App() {
   );
 }
 
-export default App;
+export default Maps;
