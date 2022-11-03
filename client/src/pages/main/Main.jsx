@@ -1,12 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import MainLog from '../../components/MainLog/MainLog';
 import MainNoLog from '../../components/MainNoLog/MainNoLog';
 
 export default function Main() {
-  const login = false;
+  const user = useSelector((state) => state.user);
   return (
     <div>
-      {login === true ? <MainLog /> : <MainNoLog />}
+      {user.login === true ? <MainLog /> : <MainNoLog />}
     </div>
   );
 }

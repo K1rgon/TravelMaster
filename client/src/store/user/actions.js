@@ -3,7 +3,7 @@ import {
 } from './constans';
 
 export function signUp(objUser) {
-  return { type: SIGNUP_USER, payload: objUser };
+  return { type: CHECK_USER, payload: objUser };
 }
 
 export function signIn(objUser) {

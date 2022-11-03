@@ -35,7 +35,7 @@ router.route('/signin')
         if (checkPass) {
           req.session.userSession = { id: user.id, email: user.email };
           req.session.userLogin = user.login;
-          res.json({ login: user.login });
+          res.json({ login: user.login, email: user.email, id: user.id });
         } else {
           res.status(400).json('Email или пароль введены не верно.');
         }
