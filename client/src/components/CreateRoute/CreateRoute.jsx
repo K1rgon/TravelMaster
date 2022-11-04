@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
-import Maps from '../Maps/Maps';
+// import Maps from '../Maps/Maps';
 import style from './CreateRoute.module.css';
 
 export default function CreateRoute(props) {
@@ -22,12 +22,12 @@ export default function CreateRoute(props) {
         <Modal.Title id="contained-modal-title-vcenter">
           Creating new route
         </Modal.Title>
+
       </Modal.Header>
       <Modal.Body>
         {/* <div className={style.box}> */}
         <Form className="w-30 align-items-center m-auto pt-5">
-
-          <div className={style.map}><Maps  /></div>
+          {/* <div className={style.map}><Maps /></div> */}
 
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
