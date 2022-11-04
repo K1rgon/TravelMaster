@@ -9,8 +9,8 @@ router.post('/add', async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       done: false,
-      done: req.body.photo,
-      date_start: req.body.dateStart,
+      foto: req.body.foto,
+      date_start: req.body.date_start,
       private: false,
       user_id: req.session.userSession.id,
     });
@@ -52,4 +52,4 @@ router.route('/route/:id')
     }
   });
 
-module.exports = router
+  module.exports = router;

@@ -32,6 +32,6 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 app.use('/user', userRouter);
-app.use('api/v1/routes', routeRouter);
+app.use('/api/v1/routes', routeRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
