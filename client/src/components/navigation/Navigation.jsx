@@ -41,6 +41,9 @@ export default function Navigation() {
                 <Link className={style.link} to="/profile">Личный кабинет</Link>
               </li>
               <li>
+                <Link className={style.link} to="/maps">Карта</Link>
+              </li>
+              <li>
                 <Link className={style.link} onClick={handleLogout} to="/logout">Выйти</Link>
               </li>
             </ul>

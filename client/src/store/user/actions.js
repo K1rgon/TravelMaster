@@ -1,8 +1,8 @@
 import {
-  SIGNIN_USER, SIGNUP_USER, LOGOUT_USER, CHECK_USER,
+  SIGNIN_USER, LOGOUT_USER, CHECK_USER,
 } from './constans';
 
-export function signUp(objUser) {
+export function check(objUser) {
   return { type: CHECK_USER, payload: objUser };
 }
 
