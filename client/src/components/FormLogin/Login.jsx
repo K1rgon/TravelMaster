@@ -29,7 +29,6 @@ export default function Login() {
         credentials: 'include',
       });
       const toJson = await res.json();
-      console.log('iz logina', toJson);
       dispatch(signIn(toJson));
       navigate('/routes');
     } catch (error) {

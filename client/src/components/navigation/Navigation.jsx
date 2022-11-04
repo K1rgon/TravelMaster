@@ -17,7 +17,6 @@ export default function Navigation() {
         'Content-Type': 'application/json',
       },
     });
-    console.log(res.status);
     dispatch(logout());
     navigate('/');
   };
@@ -41,7 +40,7 @@ export default function Navigation() {
                 <Link className={style.link} to="/profile">Личный кабинет</Link>
               </li>
               <li>
-                <Link className={style.link} to="/maps">Карта</Link>
+                <Link className={style.link} to="/map">Карта</Link>
               </li>
               <li>
                 <Link className={style.link} onClick={handleLogout} to="/logout">Выйти</Link>
