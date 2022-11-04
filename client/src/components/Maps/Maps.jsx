@@ -23,7 +23,12 @@ import {
 } from '@react-google-maps/api';
 import React, { useRef, useState } from 'react';
 
-const center = { lat: 48.8584, lng: 2.2945 };
+// Функция определения местоположения пользователя
+
+let center;
+navigator.geolocation.getCurrentPosition((position) => {
+  center = { lat: position.coords.latitude, lng: position.coords.longitude };
+});
 
 function Maps() {
   const [libraries] = useState(['places']);
@@ -46,11 +51,31 @@ function Maps() {
     return <SkeletonText />;
   }
 
+  // Функция геокодера (срабатывает только при втором клике)
+
+  async function geocodeLatLng(points) {
+    const geocoder = new google.maps.Geocoder();
+    const originResults = await geocoder.geocode({ location: points[0] });
+    const distResults = await geocoder.geocode({ location: points[points.length - 1] });
+    const geo = [...points];
+    console.log(geo);
+    console.log(originResults.results[0].formatted_address);
+    console.log(distResults.results[0].formatted_address);
+  }
+
+  // Функция рассчета маршрута
+
   async function calculateRoute() {
     const directionsService = new google.maps.DirectionsService();
 
-    const waypoints = [];
+    let waypoints = [];
     points.map((point) => waypoints.push({ location: point, stopover: false }));
+    if (waypoints.length > 2) {
+      waypoints.shift();
+      waypoints.pop();
+    } else {
+      waypoints = [];
+    }
 
     if (originRef.current.value === '' && destiantionRef.current.value === '') {
       const results = await directionsService.route({
@@ -74,6 +99,8 @@ function Maps() {
     }
   }
 
+  // Функция сброса маршрута
+
   function clearRoute() {
     setDirectionsResponse(null);
     setDistance('');
@@ -83,8 +110,12 @@ function Maps() {
     destiantionRef.current.value = '';
   }
 
+  // Функция установки маркеров на карте
+  console.log(points.length);
+
   const onClick = (e) => {
     setPoints([...points, e.latLng]);
+    geocodeLatLng(points);
   };
 
   return (
@@ -99,22 +130,22 @@ function Maps() {
         {/* Google Map Box */}
         <Map
           center={center}
-          zoom={15}
+          zoom={13}
           onClick={onClick}
           mapContainerStyle={{ width: '100%', height: '100%' }}
-          // options={{
-          //   zoomControl: false,
-          //   streetViewControl: false,
-          //   mapTypeControl: false,
-          //   fullscreenControl: false,
-          // }}
+            // options={{
+            //   zoomControl: false,
+            //   streetViewControl: false,
+            //   mapTypeControl: false,
+            //   fullscreenControl: false,
+            // }}
           onLoad={(map) => setMap(map)}
         >
           {points.map((latLng, i) => (
             <Marker key={i} position={latLng} />
           ))}
           {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
+          <DirectionsRenderer directions={directionsResponse} />
           )}
         </Map>
       </Box>
