@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-undef */
 import {
   Box,
@@ -21,7 +23,10 @@ import {
   Autocomplete,
   DirectionsRenderer,
 } from '@react-google-maps/api';
-import React, { useRef, useState } from 'react';
+import React, {
+  useRef, useState,
+  useEffect,
+} from 'react';
 
 // Функция определения местоположения пользователя
 
@@ -29,6 +34,8 @@ let center;
 navigator.geolocation.getCurrentPosition((position) => {
   center = { lat: position.coords.latitude, lng: position.coords.longitude };
 });
+
+console.log(process.env);
 
 function Maps() {
   const [libraries] = useState(['places']);
@@ -43,25 +50,29 @@ function Maps() {
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   const [points, setPoints] = useState([]);
+  const [address, setAddress] = useState([]);
 
   const originRef = useRef();
   const destiantionRef = useRef();
 
-  if (!isLoaded) {
-    return <SkeletonText />;
-  }
+  // Функция геокодера
 
-  // Функция геокодера (срабатывает только при втором клике)
+  useEffect(() => {
+    if (points.length) {
+      (async function geocodeLatLng() {
+        const geocoder = new google.maps.Geocoder();
+        const originResults = await geocoder.geocode({ location: points[points.length - 1] || [] });
+        setAddress([...address,
+          {
+            id: Math.floor(Math.random() * 999),
+            loc: originResults.results[0].formatted_address,
+          },
+        ]);
+      }());
+    }
+  }, [points]);
 
-  async function geocodeLatLng(points) {
-    const geocoder = new google.maps.Geocoder();
-    const originResults = await geocoder.geocode({ location: points[0] });
-    const distResults = await geocoder.geocode({ location: points[points.length - 1] });
-    const geo = [...points];
-    console.log(geo);
-    console.log(originResults.results[0].formatted_address);
-    console.log(distResults.results[0].formatted_address);
-  }
+  console.log(address);
 
   // Функция рассчета маршрута
 
@@ -111,109 +122,114 @@ function Maps() {
   }
 
   // Функция установки маркеров на карте
-  console.log(points.length);
 
-  const onClick = (e) => {
+  const onClick = async (e) => {
     setPoints([...points, e.latLng]);
-    geocodeLatLng(points);
   };
 
   return (
-    <Flex
-      position="relative"
-      flexDirection="column"
-      alignItems="center"
-      h="100vh"
-      w="100vw"
-    >
-      <Box position="absolute" left={0} top={0} h="100%" w="100%">
-        {/* Google Map Box */}
-        <Map
-          center={center}
-          zoom={13}
-          onClick={onClick}
-          mapContainerStyle={{ width: '100%', height: '100%' }}
-            // options={{
-            //   zoomControl: false,
-            //   streetViewControl: false,
-            //   mapTypeControl: false,
-            //   fullscreenControl: false,
-            // }}
-          onLoad={(map) => setMap(map)}
-        >
-          {points.map((latLng, i) => (
-            <Marker key={i} position={latLng} />
-          ))}
-          {directionsResponse && (
-          <DirectionsRenderer directions={directionsResponse} />
-          )}
-        </Map>
-      </Box>
-      <Box
-        p={4}
-        borderRadius="lg"
-        m={4}
-        bgColor="white"
-        shadow="base"
-        minW="container.md"
-        zIndex="1"
-      >
-        <HStack spacing={2} justifyContent="space-between">
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input
-                type="text"
-                placeholder="Origin"
-                ref={originRef}
-              />
-            </Autocomplete>
-          </Box>
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input
-                type="text"
-                placeholder="Destination"
-                ref={destiantionRef}
-              />
-            </Autocomplete>
-          </Box>
+    <>
+      {!isLoaded ? (<SkeletonText />)
 
-          <ButtonGroup>
-            <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
-              Calculate Route
-            </Button>
-            <IconButton
-              aria-label="center back"
-              icon={<FaTimes />}
-              onClick={clearRoute}
-            />
-          </ButtonGroup>
-        </HStack>
-        <HStack spacing={4} mt={4} justifyContent="space-between">
-          <Text>
-            Distance:
-            {' '}
-            {distance}
-            {' '}
-          </Text>
-          <Text>
-            Duration:
-            {' '}
-            {duration}
-            {' '}
-          </Text>
-          <IconButton
-            aria-label="center back"
-            icon={<FaLocationArrow />}
-            isRound
-            onClick={() => {
-              map.panTo(center);
-              map.setZoom(15);
-            }}
-          />
-        </HStack>
-      </Box>
-    </Flex>
+        : (
+          <Flex
+            position="relative"
+            flexDirection="column"
+            alignItems="center"
+            h="100vh"
+            w="100vw"
+          >
+            <Box position="absolute" left={0} top={0} h="100%" w="100%">
+              {/* Google Map Box */}
+              <Map
+                center={center}
+                zoom={13}
+                onClick={onClick}
+                mapContainerStyle={{ width: '100%', height: '100%' }}
+                // options={{
+                //   zoomControl: false,
+                //   streetViewControl: false,
+                //   mapTypeControl: false,
+                //   fullscreenControl: false,
+                // }}
+                onLoad={(map) => setMap(map)}
+              >
+                {points.map((latLng, i) => (
+                  <Marker key={i} position={latLng} />
+                ))}
+                {directionsResponse && (
+                  <DirectionsRenderer directions={directionsResponse} />
+                )}
+              </Map>
+            </Box>
+            <Box
+              p={4}
+              borderRadius="lg"
+              m={4}
+              bgColor="white"
+              shadow="base"
+              minW="container.md"
+              zIndex="1"
+            >
+              <HStack spacing={2} justifyContent="space-between">
+                <Box flexGrow={1}>
+                  <Autocomplete>
+                    <Input
+                      type="text"
+                      placeholder="Origin"
+                      ref={originRef}
+                    />
+                  </Autocomplete>
+                </Box>
+                <Box flexGrow={1}>
+                  <Autocomplete>
+                    <Input
+                      type="text"
+                      placeholder="Destination"
+                      ref={destiantionRef}
+                    />
+                  </Autocomplete>
+                </Box>
+
+                <ButtonGroup>
+                  <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
+                    Calculate Route
+                  </Button>
+                  <IconButton
+                    aria-label="center back"
+                    icon={<FaTimes />}
+                    onClick={clearRoute}
+                  />
+                </ButtonGroup>
+              </HStack>
+              <HStack spacing={4} mt={4} justifyContent="space-between">
+                <Text>
+                  Distance:
+                  {' '}
+                  {distance}
+                  {' '}
+                </Text>
+                <Text>
+                  Duration:
+                  {' '}
+                  {duration}
+                  {' '}
+                </Text>
+                <IconButton
+                  aria-label="center back"
+                  icon={<FaLocationArrow />}
+                  isRound
+                  onClick={() => {
+                    map.panTo(center);
+                    map.setZoom(15);
+                  }}
+                />
+              </HStack>
+            </Box>
+          </Flex>
+        )}
+
+    </>
   );
 }
 
