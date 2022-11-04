@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import style from './Navigation.module.css';
 
 export default function Navigation() {
-  const login = false;
+  const login = true;
   return (
     <div className={style.navigation}>
       <div className={style.logo}>

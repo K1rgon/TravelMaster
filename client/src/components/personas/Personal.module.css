@@ -1,0 +1,34 @@
+.block {
+  padding: 100px;
+  justify-content: space-around;
+  padding-top: 70px;
+  display: flex;
+  gap: 30px;
+}
+.blockleft {
+  text-transform: uppercase;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  height: 74vh;
+  background-color: rgb(103, 103, 103);
+}
+.userphoto {
+}
+.username {
+}
+.blockright {
+  width: 50%;
+  height: 74vh;
+  background-color: rgb(103, 103, 103);
+}
+
+.routes {
+  width: 50%;
+}
+
+.cars {
+}
