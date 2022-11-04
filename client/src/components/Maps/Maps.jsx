@@ -35,8 +35,6 @@ navigator.geolocation.getCurrentPosition((position) => {
   center = { lat: position.coords.latitude, lng: position.coords.longitude };
 });
 
-console.log(process.env);
-
 function Maps() {
   const [libraries] = useState(['places']);
 
@@ -61,18 +59,16 @@ function Maps() {
     if (points.length) {
       (async function geocodeLatLng() {
         const geocoder = new google.maps.Geocoder();
-        const originResults = await geocoder.geocode({ location: points[points.length - 1] || [] });
+        const originResults = await geocoder.geocode({ location: points[points.length - 1] });
         setAddress([...address,
           {
-            id: Math.floor(Math.random() * 999),
-            loc: originResults.results[0].formatted_address,
+            place_id: originResults.results[0].place_id,
+            title: originResults.results[0].formatted_address,
           },
         ]);
       }());
     }
   }, [points]);
-
-  console.log(address);
 
   // Функция рассчета маршрута
 
@@ -123,9 +119,15 @@ function Maps() {
 
   // Функция установки маркеров на карте
 
-  const onClick = async (e) => {
+  const onClick = (e) => {
     setPoints([...points, e.latLng]);
   };
+
+  // Функция удаления маркеров с карты
+
+  function onRightClick() {
+    setPoints([...points.filter((el, i) => i !== points.length - 1)]);
+  }
 
   return (
     <>
@@ -145,6 +147,7 @@ function Maps() {
                 center={center}
                 zoom={13}
                 onClick={onClick}
+                onRightClick={onRightClick}
                 mapContainerStyle={{ width: '100%', height: '100%' }}
                 // options={{
                 //   zoomControl: false,
