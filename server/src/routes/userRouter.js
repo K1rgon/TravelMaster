@@ -51,4 +51,10 @@ router.get('/logout', async (req, res) => {
   res.sendStatus(200);
 });
 
+router.get('/check', (req, res) => {
+  const { userId, userLogin } = req.session;
+  res.json({ login: userLogin, id: userId });
+  res.end();
+});
+
 module.exports = router;

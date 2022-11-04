@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signUp } from '../../store/user/actions';
+import { check } from '../../store/user/actions';
 
 export default function Registration() {
   const [user, setUser] = useState({
@@ -33,7 +33,7 @@ export default function Registration() {
       credentials: 'include',
     });
     const toJson = await res.json();
-    dispatch(signUp(toJson));
+    dispatch(check(toJson));
     navigate('/routes');
   };
 
