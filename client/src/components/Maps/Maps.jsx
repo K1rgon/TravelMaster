@@ -132,7 +132,7 @@ function Maps() {
             <Autocomplete>
               <Input
                 type="text"
-                placeholder="Origin"
+                placeholder="Origi
                 ref={originRef}
               />
             </Autocomplete>
