@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Maps from '../Maps/Maps';
 import style from './CreateRoute.module.css';
+import { newRoute } from '../../store/route/actions';
 
 export default function CreateRoute(props) {
-  const inputHandler = () => {
-    console.log(123);
+  const [route, setRoute] = useState({
+    title: '', description: '', date_start: '', photo: '',
+  });
+  const dispatch = useDispatch();
+
+  const inputHandler = (e) => {
+    setRoute((preMy) => ({ ...preMy, [e.target.name]: e.target.value }));
+  };
+
+  const addRoute = async (e) => {
+    e.preventDefault();
+    const res = await fetch('http://localhost:3001/api/v1/routes/add', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: route.title,
+        description: route.description,
+        date_start: route.date_start,
+        foto: route.photo,
+      }),
+      credentials: 'include',
+    });
+    const toJson = await res.json();
+    console.log(toJson);
+    dispatch(newRoute(toJson));
+    props.onHide();
   };
 
   return (
@@ -17,6 +45,7 @@ export default function CreateRoute(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      onSubmit={addRoute}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -27,7 +56,7 @@ export default function CreateRoute(props) {
       <Modal.Body>
         {/* <div className={style.box}> */}
         <Form className="w-30 align-items-center m-auto pt-5">
-          <div className={style.map}><Maps /></div>
+          {/* <div className={style.map}><Maps /></div> */}
 
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
@@ -52,7 +81,7 @@ export default function CreateRoute(props) {
         {/* </div> */}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={addRoute} type="submit">Отправить</Button>
       </Modal.Footer>
     </Modal>
 
