@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -38,13 +39,25 @@ export default function MyModal({ active, onHide }) {
   return (
     <div className={active ? 'modal active' : 'modal'} onClick={(e) => onHide()} role="button" tabIndex={0}>
       <div className={active ? 'modal_content active' : 'modal_content'} onClick={(e) => e.stopPropagation()} role="button" tabIndex={0}>
-        <form className="box">
-          <input onChange={(e) => inputHandler(e)} type="text" placeholder="Title your route" name="title" />
-          <input onChange={(e) => inputHandler(e)} type="text" placeholder="Your description" name="description" />
+        <div className="input_group">
+          <input
+            onChange={(e) => inputHandler(e)}
+            type="text"
+            name="title"
+          />
+          <label>Название маршрута</label>
+        </div>
+        <div className="input_group">
+          <input onChange={(e) => inputHandler(e)} type="text" name="description" />
+          <label>Описание маршрута</label>
+        </div>
+        <div className="input_group">
           <input onChange={(e) => inputHandler(e)} type="date" name="date_start" />
-          <input onChange={(e) => inputHandler(e)} type="file" name="photo" />
-          <button onClick={addRoute} type="submit">Send</button>
-        </form>
+        </div>
+        <div className="input_group">
+          <input onChange={(e) => inputHandler(e)} type="file" id="file" name="photo" placeholder="Загрузите фото" />
+        </div>
+        <button onClick={addRoute} type="submit">Send</button>
       </div>
     </div>
   );
