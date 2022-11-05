@@ -19,5 +19,6 @@ module.exports = {
   rules: {
     'no-unused-vars': 0,
     'jsx-props-no-speading': 0,
+    'label-has-associated-control':0
   },
 };

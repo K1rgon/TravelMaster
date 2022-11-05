@@ -31,6 +31,9 @@ import React, {
 // Функция определения местоположения пользователя
 
 let center;
+if (!center) {
+  center = { lat: 30, lng: 31 };
+}
 navigator.geolocation.getCurrentPosition((position) => {
   center = { lat: position.coords.latitude, lng: position.coords.longitude };
 });
