@@ -14,6 +14,8 @@ import CreateRoute from './components/CreateRoute/CreateRoute';
 import { check } from './store/user/actions';
 
 function App() {
+
+  const login = true;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,6 +28,7 @@ function App() {
       dispatch(check(toJson));
     }());
   }, []);
+
 
   return (
     <div>

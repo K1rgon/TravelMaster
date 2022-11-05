@@ -5,6 +5,8 @@ import { logout } from '../../store/user/actions';
 import style from './Navigation.module.css';
 
 export default function Navigation() {
+  const login = true;
+
   // const login = false;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
