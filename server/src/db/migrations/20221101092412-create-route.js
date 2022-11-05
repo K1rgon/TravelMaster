@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
       },
       foto: {
-        type: Sequelize.TEXT,
+        type: Sequelize.BLOB,
       },
       date_start: {
         type: Sequelize.TEXT,

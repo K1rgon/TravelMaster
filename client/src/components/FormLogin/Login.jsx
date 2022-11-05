@@ -1,19 +1,39 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { signIn } from '../../store/user/actions';
 
 export default function Login() {
   const [user, setUser] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleStateUser = (e) => {
     setUser((preMy) => ({ ...preMy, [e.target.name]: e.target.value }));
   };
 
-  const handlerBtn = (e) => {
+  const handlerBtn = async (e) => {
     e.preventDefault();
-    console.log(user);
+    try {
+      const res = await fetch('http://localhost:3001/user/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: user.email,
+          password: user.password,
+        }),
+        credentials: 'include',
+      });
+      const toJson = await res.json();
+      dispatch(signIn(toJson));
+      navigate('/routes');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
