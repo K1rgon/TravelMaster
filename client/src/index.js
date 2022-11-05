@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import store from './store/store';
 import App from './App';
-import mapsSizeContext from './context/context';
+// import mapsSizeContext from './context/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

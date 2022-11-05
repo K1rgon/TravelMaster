@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import Video from './components/Video/Video';
 import Main from './pages/main/Main';
@@ -12,13 +12,14 @@ import PersonalRoutes from './pages/routes/PersonalRoutes';
 import Maps from './components/Maps/Maps';
 import CreateRoute from './components/CreateRoute/CreateRoute';
 import { check } from './store/user/actions';
+import RoutePage from './pages/routes/RoutePage';
 
 function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     (async function getUser() {
-      const res = await fetch('http://localhost:3001/user/check', {
+      const res = await fetch('http://localhost:5000/user/check', {
         method: 'GET',
         credentials: 'include',
       });
@@ -38,8 +39,8 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
-            <Route path="*" element={<Main />} />
             <Route path="/create" element={<CreateRoute />} />
+            <Route path="/routes/:id" element={<RoutePage />} />
           </Routes>
         )
         : (
@@ -50,7 +51,7 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/create" element={<CreateRoute />} />
-            <Route path="*" element={<Main />} />
+            <Route path="/routes/:id" element={<RoutePage />} />
           </Routes>
         )}
     </div>

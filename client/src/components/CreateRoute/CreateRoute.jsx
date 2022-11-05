@@ -8,7 +8,7 @@ import Maps from '../Maps/Maps';
 import style from './CreateRoute.module.css';
 import { newRoute } from '../../store/route/actions';
 
-export default function CreateRoute(props) {
+export default function CreateRoute() {
   const [route, setRoute] = useState({
     title: '', description: '', date_start: '', photo: '',
   });
@@ -36,7 +36,6 @@ export default function CreateRoute(props) {
       });
       const toJson = await res.json();
       dispatch(newRoute(toJson));
-      props.onHide();
     } catch (err) {
       console.log(err.message);
     }
@@ -44,7 +43,6 @@ export default function CreateRoute(props) {
 
   return (
     <Modal
-      {...props}
       size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
