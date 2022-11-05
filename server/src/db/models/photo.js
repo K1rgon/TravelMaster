@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Photo.init({
     title: DataTypes.TEXT,
-    photo: DataTypes.TEXT,
+    photo: DataTypes.BLOB,
     route_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
   }, {

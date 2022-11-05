@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     finish_x: DataTypes.TEXT,
     finish_y: DataTypes.TEXT,
     done: DataTypes.BOOLEAN,
-    foto: DataTypes.TEXT,
+    foto: DataTypes.BLOB,
     date_start: DataTypes.TEXT,
     date_finish: DataTypes.TEXT,
     private: DataTypes.BOOLEAN,
