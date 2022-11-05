@@ -42,10 +42,11 @@ export default function CreateRoute(props) {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       onSubmit={addRoute}
+      className={style.box}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
