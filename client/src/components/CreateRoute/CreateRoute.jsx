@@ -20,23 +20,26 @@ export default function CreateRoute(props) {
 
   const addRoute = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:3001/api/v1/routes/add', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: route.title,
-        description: route.description,
-        date_start: route.date_start,
-        foto: route.photo,
-      }),
-      credentials: 'include',
-    });
-    const toJson = await res.json();
-    console.log(toJson);
-    dispatch(newRoute(toJson));
-    props.onHide();
+    try {
+      const res = await fetch('http://localhost:3001/api/v1/routes/add', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: route.title,
+          description: route.description,
+          date_start: route.date_start,
+          foto: route.photo,
+        }),
+        credentials: 'include',
+      });
+      const toJson = await res.json();
+      dispatch(newRoute(toJson));
+      props.onHide();
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
