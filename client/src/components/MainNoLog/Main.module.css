@@ -7,11 +7,15 @@
 .buttons {
   display: flex;
   justify-content: space-around;
-  top: 50%;
   margin: auto;
   max-width: 1300px;
+  position: absolute;
+  gap: 30%;
+  top: 70%;
+  left: 38%;
 }
 .btn {
+  box-sizing: content-box;
   padding: 15px 30px;
   font-size: 20px;
   background-color: rgb(250, 177, 93);
@@ -19,6 +23,9 @@
   text-decoration: none;
   color: black;
   transition: all 0.5s;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
 }
 .btn:hover {
   color: black;

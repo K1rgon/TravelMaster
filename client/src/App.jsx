@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import Video from './components/Video/Video';
 import Main from './pages/main/Main';
@@ -11,9 +11,9 @@ import Routers from './pages/routes/Routes';
 import PersonalRoutes from './pages/routes/PersonalRoutes';
 import Maps from './components/Maps/Maps';
 import { check } from './store/user/actions';
+import RoutePage from './pages/routes/RoutePage';
 
 function App() {
-  const login = true;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,7 +38,7 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
-            <Route path="*" element={<Main />} />
+            <Route path="/routes/:id" element={<RoutePage />} />
           </Routes>
         )
         : (
@@ -48,7 +48,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
-            <Route path="*" element={<Main />} />
+            <Route path="/routes/:id" element={<RoutePage />} />
           </Routes>
         )}
     </div>
