@@ -1,3 +1,8 @@
+/* eslint-disable no-new */
+/* eslint-disable no-plusplus */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-array-index-key */
@@ -55,6 +60,39 @@ function Maps(props) {
 
   const originRef = useRef();
   const destiantionRef = useRef();
+
+  // Функционал поиска отелей поблизости
+
+  let service;
+
+  function callback(results, status) {
+    const image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (let i = 0; i < results.length; i++) {
+        new google.maps.Marker({
+          map,
+          icon: image,
+          title: results[i].name,
+          position: results[i].geometry.location,
+        });
+      }
+    }
+  }
+
+  function getHotels() {
+    const lat = JSON.stringify(points[points.length - 1].toJSON().lat);
+    const lng = JSON.stringify(points[points.length - 1].toJSON().lng);
+    const pyrmont = new google.maps.LatLng(lat, lng);
+
+    const request = {
+      location: pyrmont,
+      radius: '500',
+      type: ['lodging'],
+    };
+
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+  }
 
   // Функция геокодера
 
@@ -152,12 +190,12 @@ function Maps(props) {
                 onClick={onClick}
                 onRightClick={onRightClick}
                 mapContainerStyle={{ width: props.sizeMap.widthMap, height: props.sizeMap.heightMap }}
-                // options={{
-                //   zoomControl: false,
-                //   streetViewControl: false,
-                //   mapTypeControl: false,
-                //   fullscreenControl: false,
-                // }}
+                options={{
+                  zoomControl: false,
+                  streetViewControl: false,
+                  mapTypeControl: false,
+                  fullscreenControl: false,
+                }}
                 onLoad={(map) => setMap(map)}
               >
                 {points.map((latLng, i) => (
@@ -202,6 +240,9 @@ function Maps(props) {
                 <ButtonGroup>
                   <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
                     Calculate Route
+                  </Button>
+                  <Button colorScheme="pink" type="submit" onClick={getHotels}>
+                    Get Hotels
                   </Button>
                   <IconButton
                     aria-label="center back"

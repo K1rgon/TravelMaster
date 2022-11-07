@@ -39,10 +39,10 @@ export default function MyModal({ active, onHide }) {
   };
 
   const sizeMap = {
-    widthMap: '400px',
-    heightMap: '200px',
-    widthInput: '200px',
-    heightInput: '50px',
+    widthMap: '85vw',
+    heightMap: '55vh',
+    widthInput: '85vw',
+    heightInput: '55vh',
   };
   return (
     <div className={active ? 'modal active' : 'modal'} onClick={(e) => onHide()} role="button" tabIndex={0}>
