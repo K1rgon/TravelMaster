@@ -8,7 +8,7 @@ export default function RoutePage() {
   return (
     <div>
       <Navigation />
-      <RouterItem />
+      <RouterItem id={id} />
     </div>
   );
 }

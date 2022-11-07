@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     (async function getUser() {
-      const res = await fetch('http://localhost:5000/user/check', {
+      const res = await fetch('http://localhost:3001/user/check', {
         method: 'GET',
         credentials: 'include',
       });
@@ -38,7 +38,7 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
-            <Route path="/routes/:id" element={<RoutePage />} />
+            <Route path="/myroutes/:id" element={<RoutePage />} />
           </Routes>
         )
         : (

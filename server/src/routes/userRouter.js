@@ -16,9 +16,24 @@ router.route('/signup')
         const newUser = await User.create({
           login, email, password: hashPass, name, surname, foto,
         });
+        req.session.userSession = {
+          id: newUser.id,
+          email: newUser.email,
+          login: newUser.login,
+          foto: newUser.foto,
+          name: newUser.name,
+          surname: newUser.surname,
+        };
         req.session.userId = newUser.id;
         req.session.userLogin = newUser.login;
-        res.json({ login: newUser.login });
+        res.json({
+          id: newUser.id,
+          email: newUser.email,
+          login: newUser.login,
+          foto: newUser.foto,
+          name: newUser.name,
+          surname: newUser.surname,
+        });
       }
     } catch (error) {
       console.log('Signup err', error);
@@ -33,11 +48,23 @@ router.route('/signin')
       if (user) {
         const checkPass = await bcrypt.compare(password, user.password);
         if (checkPass) {
-          req.session.userSession = { id: user.id, email: user.email };
+          req.session.userSession = {
+            id: user.id,
+            email: user.email,
+            login: user.login,
+            foto: user.foto,
+            name: user.name,
+            surname: user.surname,
+          };
           req.session.userLogin = user.login;
           console.log(user);
           res.json({
-            login: user.login, email: user.email, id: user.id, foto: user.foto,
+            login: user.login,
+            email: user.email,
+            id: user.id,
+            foto: user.foto,
+            name: user.name,
+            surname: user.surname,
           });
         } else {
           res.status(400).json('Email или пароль введены не верно.');
@@ -55,8 +82,12 @@ router.get('/logout', async (req, res) => {
 });
 
 router.get('/check', (req, res) => {
-  const { userId, userLogin } = req.session;
-  res.json({ login: userLogin, id: userId });
+  const {
+    id, login, email, foto, name, surname,
+  } = req.session.userSession;
+  res.json({
+    id, login, email, foto, name, surname,
+  });
   res.end();
 });
 
