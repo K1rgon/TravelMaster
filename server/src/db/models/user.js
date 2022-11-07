@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.TEXT,
     surname: DataTypes.TEXT,
     token: DataTypes.TEXT,
-    foto: DataTypes.BLOB,
+    foto: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'User',

@@ -33,6 +33,11 @@ export default function Navigation() {
           ? (
             <ul className={style.links}>
               <li>
+                Добро пожаловать,
+                {' '}
+                {user.login}
+              </li>
+              <li>
                 <Link className={style.link} to="/routes">Популярные маршруты</Link>
               </li>
               <li>

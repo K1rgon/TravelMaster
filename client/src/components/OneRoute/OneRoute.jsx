@@ -12,9 +12,12 @@ function BasicExample({ route }) {
   };
   return (
     <div className="card">
-      <img src={route.foto} alt={route.title} width="100%" />
+      <img src={route.foto} alt="Ждем фото" width="100%" />
       <h1>{route.title}</h1>
-      <p className="price">{`${route.date_start} - ${route?.date_finish}`}</p>
+      <p className="date">Дата начала поездки:</p>
+      <p className="date">
+        {route?.date_start}
+      </p>
       <p>{route.description}</p>
       <p><button className="setting" type="submit">Настроить маршрут</button></p>
       <p><button className="delete" onClick={deleteRoute} type="submit">Удалить маршрут</button></p>

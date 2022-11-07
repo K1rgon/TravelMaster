@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
@@ -15,6 +16,19 @@ export default function MyModal({ active, onHide }) {
 
   const inputHandler = (e) => {
     setRoute((preMy) => ({ ...preMy, [e.target.name]: e.target.value }));
+  };
+
+  const inputFotoHandler = (e) => {
+    const { files } = e.target;
+    if (files[0].type.match('image')) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        setRoute((preMy) => ({ ...preMy, photo: ev.target.result }));
+      };
+      reader.readAsDataURL(files[0]);
+    } else {
+      alert('Выберите файл другово типа');
+    }
   };
 
   const addRoute = async (e) => {
@@ -66,7 +80,7 @@ export default function MyModal({ active, onHide }) {
           <input onChange={(e) => inputHandler(e)} type="date" name="date_start" />
         </div>
         <div className="input_group">
-          <input onChange={(e) => inputHandler(e)} type="file" id="file" name="photo" placeholder="Загрузите фото" />
+          <input onChange={(e) => inputFotoHandler(e)} type="file" id="file" name="photo" placeholder="Загрузите фото" accept="image/*" />
         </div>
         <button onClick={addRoute} type="submit">Send</button>
       </div>

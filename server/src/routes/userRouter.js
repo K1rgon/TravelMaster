@@ -16,9 +16,10 @@ router.route('/signup')
         const newUser = await User.create({
           login, email, password: hashPass, name, surname, foto,
         });
+        req.session.userSession = { id: newUser.id, email: newUser.email, login: newUser.login };
         req.session.userId = newUser.id;
         req.session.userLogin = newUser.login;
-        res.json({ login: newUser.login });
+        res.json({ id: newUser.id, login: newUser.login });
       }
     } catch (error) {
       console.log('Signup err', error);
