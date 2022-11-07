@@ -38,7 +38,7 @@ navigator.geolocation.getCurrentPosition((position) => {
   center = { lat: position.coords.latitude, lng: position.coords.longitude };
 });
 
-function Maps() {
+function Maps(props) {
   const [libraries] = useState(['places']);
 
   const { isLoaded } = useJsApiLoader({
@@ -141,17 +141,17 @@ function Maps() {
             position="relative"
             flexDirection="column"
             alignItems="center"
-            h="100vh"
-            w="100vw"
+            h={props.sizeMap.heightMap}
+            w={props.sizeMap.widthMap}
           >
-            <Box position="absolute" left={0} top={0} h="100%" w="100%">
+            <Box position="absolute" left={0} top={0} h={props.sizeMap.heightMap} w={props.sizeMap.widthMap}>
               {/* Google Map Box */}
               <Map
                 center={center}
                 zoom={13}
                 onClick={onClick}
                 onRightClick={onRightClick}
-                mapContainerStyle={{ width: '100%', height: '100%' }}
+                mapContainerStyle={{ width: props.sizeMap.widthMap, height: props.sizeMap.heightMap }}
                 // options={{
                 //   zoomControl: false,
                 //   streetViewControl: false,
@@ -176,6 +176,8 @@ function Maps() {
               shadow="base"
               minW="container.md"
               zIndex="1"
+              height="100px"
+              width="400px"
             >
               <HStack spacing={2} justifyContent="space-between">
                 <Box flexGrow={1}>
