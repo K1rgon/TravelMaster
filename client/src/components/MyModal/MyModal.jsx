@@ -12,6 +12,7 @@ export default function MyModal({ active, onHide }) {
   const [route, setRoute] = useState({
     title: '', description: '', date_start: '', photo: '',
   });
+  const [address, setAddress] = useState([]);
   const dispatch = useDispatch();
 
   const inputHandler = (e) => {
@@ -43,27 +44,31 @@ export default function MyModal({ active, onHide }) {
         description: route.description,
         date_start: route.date_start,
         foto: route.photo,
+        start_x: address[0].place_id,
+        finish_x: address[address.length - 1].place_id,
       }),
       credentials: 'include',
     });
     const toJson = await res.json();
-    console.log(toJson);
     dispatch(newRoute(toJson));
+    setAddress([]);
+    setRoute({});
     onHide();
   };
 
   const sizeMap = {
-    widthMap: '400px',
-    heightMap: '200px',
-    widthInput: '200px',
-    heightInput: '50px',
+    widthMap: '85vw',
+    heightMap: '55vh',
+    widthInput: '85vw',
+    heightInput: '55vh',
   };
   return (
     <div className={active ? 'modal active' : 'modal'} onClick={(e) => onHide()} role="button" tabIndex={0}>
       <div className={active ? 'modal_content active' : 'modal_content'} onClick={(e) => e.stopPropagation()} role="button" tabIndex={0}>
         <div className="maps">
-          <Maps sizeMap={sizeMap} />
+          <Maps sizeMap={sizeMap} address={address} setAddress={setAddress} />
         </div>
+        
         <div className="input_group">
           <input
             onChange={(e) => inputHandler(e)}

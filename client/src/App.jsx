@@ -38,7 +38,7 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
-            <Route path="/routes/:id" element={<RoutePage />} />
+            <Route path="/myroutes/:id" element={<RoutePage />} />
           </Routes>
         )
         : (
