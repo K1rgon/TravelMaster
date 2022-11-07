@@ -20,6 +20,13 @@ export function routeChange() {
   return { type: CHANGE_ROUTE };
 }
 
-export function routeDelete() {
-  return { type: DELETE_ROUTE };
-}
+export const routeDelete = (id) => async (dispatch) => {
+  try {
+    await fetch(`http://localhost:3001/api/v1/routes/route/${id}`, {
+      method: 'DELETE',
+    });
+    dispatch({ type: DELETE_ROUTE, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
