@@ -62,9 +62,6 @@ function MapsToCard(props) {
   const destiantionRef = useRef();
 
   // Функционал поиска отелей поблизости
-  console.log('points', points);
-  console.log('propspoints', props.points);
-
   let service;
 
   function callback(results, status) {
@@ -128,8 +125,8 @@ function MapsToCard(props) {
 
     if (originRef.current.value === '' && destiantionRef.current.value === '') {
       const results = await directionsService.route({
-        origin: props.points,
-        destination: props.points[props.points.length - 1],
+        origin: { placeId: props.points[0] },
+        destination: { placeId: props.points[props.points.length - 1] },
         // waypoints,
         travelMode: google.maps.TravelMode.DRIVING,
       });
@@ -147,6 +144,10 @@ function MapsToCard(props) {
       setDuration(results.routes[0].legs[0].duration.text);
     }
   }
+
+  useEffect(() => {
+    calculateRoute();
+  }, [props]);
 
   // Функция сброса маршрута
 

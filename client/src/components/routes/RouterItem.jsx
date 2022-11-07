@@ -10,15 +10,12 @@ export default function RouterItem({ id }) {
   const getRoute = async () => {
     const res = await fetch(`http://localhost:3001/api/v1/routes/route/${id}`);
     const toJson = await res.json();
-    console.log('from back', toJson);
     setPoints([toJson.start_x, toJson.finish_x]);
   };
 
   useEffect(() => {
     getRoute();
   }, []);
-
-  console.log(points);
 
   const sizeMap = {
     widthMap: '85vw',
