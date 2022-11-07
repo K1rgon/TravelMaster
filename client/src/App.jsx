@@ -38,7 +38,6 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
-            <Route path="/create" element={<CreateRoute />} />
             <Route path="/routes/:id" element={<RoutePage />} />
           </Routes>
         )
@@ -49,7 +48,6 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
-            <Route path="/create" element={<CreateRoute />} />
             <Route path="/routes/:id" element={<RoutePage />} />
           </Routes>
         )}
