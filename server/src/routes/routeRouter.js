@@ -3,6 +3,11 @@ const { Route } = require('../db/models');
 
 const router = express.Router();
 
+router.get('/', async (req,res)=>{
+    const allRoutes = await Route.findAll()
+    res.status(200).json(allRoutes)
+})
+
 router.post('/add', async (req, res) => {
   try {
     const newRoute = await Route.create({

@@ -1,12 +1,8 @@
-import React, { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { createContext } from 'react';
 
 const mapsSizeContext = createContext();
 
 function mapsSizeContextProvider({ children }) {
-
-
-    
   return (
     <mapsSizeContext.Provider value={{
 

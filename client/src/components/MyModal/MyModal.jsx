@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { newRoute } from '../../store/route/actions';
+import Maps from '../Maps/Maps';
 import './modal.css';
 
 // eslint-disable-next-line react/prop-types
@@ -36,9 +37,19 @@ export default function MyModal({ active, onHide }) {
     dispatch(newRoute(toJson));
     onHide();
   };
+
+  const sizeMap = {
+    widthMap: '400px',
+    heightMap: '200px',
+    widthInput: '200px',
+    heightInput: '50px',
+  };
   return (
     <div className={active ? 'modal active' : 'modal'} onClick={(e) => onHide()} role="button" tabIndex={0}>
       <div className={active ? 'modal_content active' : 'modal_content'} onClick={(e) => e.stopPropagation()} role="button" tabIndex={0}>
+        <div className="maps">
+          <Maps sizeMap={sizeMap} />
+        </div>
         <div className="input_group">
           <input
             onChange={(e) => inputHandler(e)}
