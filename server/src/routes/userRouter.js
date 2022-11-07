@@ -35,7 +35,10 @@ router.route('/signin')
         if (checkPass) {
           req.session.userSession = { id: user.id, email: user.email };
           req.session.userLogin = user.login;
-          res.json({ login: user.login, email: user.email, id: user.id });
+          console.log(user);
+          res.json({
+            login: user.login, email: user.email, id: user.id, foto: user.foto,
+          });
         } else {
           res.status(400).json('Email или пароль введены не верно.');
         }
@@ -55,6 +58,21 @@ router.get('/check', (req, res) => {
   const { userId, userLogin } = req.session;
   res.json({ login: userLogin, id: userId });
   res.end();
+});
+
+router.post('/update', async (req, res) => {
+  try {
+    const { foto, id } = req.body;
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    user.foto = foto;
+    user.save();
+  } catch (e) {
+    console.log(e.message);
+  }
 });
 
 module.exports = router;
