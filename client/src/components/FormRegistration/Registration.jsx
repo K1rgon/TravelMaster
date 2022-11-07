@@ -18,7 +18,7 @@ export default function Registration() {
 
   const handlerBtn = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:3001/user/signup', {
+    const res = await fetch('http://localhost:5000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
