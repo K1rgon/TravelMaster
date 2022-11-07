@@ -10,7 +10,6 @@ import RegisterPage from './pages/register/Register';
 import Routers from './pages/routes/Routes';
 import PersonalRoutes from './pages/routes/PersonalRoutes';
 import Maps from './components/Maps/Maps';
-import CreateRoute from './components/CreateRoute/CreateRoute';
 import { check } from './store/user/actions';
 import RoutePage from './pages/routes/RoutePage';
 
