@@ -11,6 +11,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const userRouter = require('./routes/userRouter');
 const routeRouter = require('./routes/routeRouter');
+const autoRouter = require('./routes/carRouter');
 
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 app.use(express.urlencoded({ extended: true }));
@@ -34,5 +35,6 @@ app.use(session(sessionConfig));
 
 app.use('/user', userRouter);
 app.use('/api/v1/routes', routeRouter);
+app.use('/car', autoRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
