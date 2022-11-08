@@ -14,7 +14,17 @@ import RoutePage from './pages/routes/RoutePage';
 
 function App() {
   const user = useSelector((state) => state.user);
-  console.log(user.login);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    (async function getUser() {
+      const res = await fetch('http://localhost:3001/user/check', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const toJson = await res.json();
+      dispatch(check(toJson));
+    }());
+  }, []);
 
   return (
     <div>
@@ -27,7 +37,7 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
-            <Route path="/routes/:id" element={<RoutePage />} />
+            <Route path="/myroutes/:id" element={<RoutePage />} />
           </Routes>
         )
         : (

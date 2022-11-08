@@ -10,7 +10,7 @@ export default function Personal() {
   console.log(user);
 
   const updateUser = async (data) => {
-    const res = await fetch('http://localhost:5000/user/update', {
+    const res = await fetch('http://localhost:3001/user/update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,7 +22,6 @@ export default function Personal() {
       credentials: 'include',
     });
     const toJson = await res.json();
-    console.log(toJson);
   };
 
   // mok datas ===========================

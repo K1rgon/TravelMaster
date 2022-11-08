@@ -21,8 +21,8 @@
 .modal_content { 
     display:grid;
     place-items: center;
-    height: 75%;
-    width: 75%;
+    height: 90%;
+    width: 90%;
     padding: 20px;
     background-color: white;
     transform: scale(0.4);

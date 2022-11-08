@@ -43,7 +43,7 @@ navigator.geolocation.getCurrentPosition((position) => {
   center = { lat: position.coords.latitude, lng: position.coords.longitude };
 });
 
-function Maps(props) {
+function MapsToCard(props) {
   const [libraries] = useState(['places']);
 
   const { isLoaded } = useJsApiLoader({
@@ -55,13 +55,13 @@ function Maps(props) {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
-  const [points, setPoints] = useState([]);
+  const [points, setPoints] = useState(props.points || []);
+  const [address, setAddress] = useState([]);
 
   const originRef = useRef();
   const destiantionRef = useRef();
 
   // Функционал поиска отелей поблизости
-
   let service;
 
   function callback(results, status) {
@@ -94,13 +94,12 @@ function Maps(props) {
   }
 
   // Функция геокодера
-
   useEffect(() => {
     if (points.length) {
       (async function geocodeLatLng() {
         const geocoder = new google.maps.Geocoder();
         const originResults = await geocoder.geocode({ location: points[points.length - 1] });
-        props.setAddress([...props.address,
+        setAddress([...address,
           {
             place_id: originResults.results[0].place_id,
             title: originResults.results[0].formatted_address,
@@ -126,9 +125,9 @@ function Maps(props) {
 
     if (originRef.current.value === '' && destiantionRef.current.value === '') {
       const results = await directionsService.route({
-        origin: points[0],
-        destination: points[points.length - 1],
-        waypoints,
+        origin: { placeId: props.points[0] },
+        destination: { placeId: props.points[props.points.length - 1] },
+        // waypoints,
         travelMode: google.maps.TravelMode.DRIVING,
       });
       setDirectionsResponse(results);
@@ -145,6 +144,10 @@ function Maps(props) {
       setDuration(results.routes[0].legs[0].duration.text);
     }
   }
+
+  useEffect(() => {
+    calculateRoute();
+  }, [props]);
 
   // Функция сброса маршрута
 
@@ -197,11 +200,11 @@ function Maps(props) {
                 }}
                 onLoad={(map) => setMap(map)}
               >
-                {points.map((latLng, i) => (
-                  <Marker key={i} position={latLng} />
-                ))}
+                {/* {props.points.map((place_id, i) => (
+                  <Marker key={i} position={place_id} />
+                ))} */}
                 {directionsResponse && (
-                  <DirectionsRenderer directions={directionsResponse} />
+                <DirectionsRenderer directions={directionsResponse} />
                 )}
               </Map>
             </Box>
@@ -284,4 +287,4 @@ function Maps(props) {
   );
 }
 
-export default Maps;
+export default MapsToCard;

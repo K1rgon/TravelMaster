@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       photo: {
-        type: Sequelize.BLOB,
+        type: Sequelize.TEXT,
       },
       route_id: {
         type: Sequelize.INTEGER,

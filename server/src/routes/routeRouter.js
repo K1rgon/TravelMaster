@@ -17,6 +17,8 @@ router.post('/add', async (req, res) => {
       foto: req.body.foto,
       date_start: req.body.date_start,
       private: false,
+      start_x: req.body.start_x,
+      finish_x: req.body.finish_x,
       user_id: req.session.userSession.id,
     });
     res.status(200).json(newRoute);
@@ -34,8 +36,18 @@ router.post('/myroutes', async (req, res) => {
     console.log(error);
   }
 });
+// http://localhost:3001/api/v1/routes/route/4 
 
 router.route('/route/:id')
+  .get(async(req,res)=>{
+    try {
+      const { id } = req.params;
+      const route = await Route.findByPk(id)
+      res.status(200).json(route)
+    } catch (error) {
+      console.log(error)
+    }
+  })
   .patch(async (req, res) => {
     try {
       const { id } = req.params;
