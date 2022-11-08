@@ -10,6 +10,9 @@ export default function userReducer(state = initialState, action) {
     case CHECK_USER: {
       return action.payload;
     }
+    case SIGNUP_USER: {
+      return action.payload;
+    }
     case SIGNIN_USER: {
       return action.payload;
     }

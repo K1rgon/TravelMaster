@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import style from './Personal.module.css';
 import image from '../../image/user.png';
 
 export default function Personal() {
-  // mok datas ============================
-  const user = {
-    login: 'user',
-    email: 'user@mail.ru',
-    password: '123',
-    name: 'name',
-    surname: 'surname',
-    token: 'token',
-    foto: image,
+  const user = useSelector((store) => store.user);
+  const [userInfo, setUser] = useState(user);
+  console.log(user);
+
+  const updateUser = async (data) => {
+    const res = await fetch('http://localhost:5000/user/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: user.id,
+        foto: data,
+      }),
+      credentials: 'include',
+    });
+    const toJson = await res.json();
+    console.log(toJson);
   };
+
+  // mok datas ===========================
 
   const routes = [{ start: '123', end: '321', id: 34 }, { start: '1234', end: '4321', id: 24 }];
   const cars = [{ mark: 'Audi', year: '2008' }];
   // ======================================
-
-  const [userInfo, setUser] = useState(user);
 
   const trigerInput = () => document.querySelector('#imageFile').click();
 
@@ -29,6 +39,7 @@ export default function Personal() {
       const reader = new FileReader();
       reader.onload = (ev) => {
         setUser((preMy) => ({ ...preMy, foto: ev.target.result }));
+        updateUser(ev.target.result);
       };
       reader.readAsDataURL(files[0]);
     } else {
@@ -58,6 +69,7 @@ export default function Personal() {
           ))}
         </div>
         <div className={style.cars}>
+          <button type="button">Добавить новую машину</button>
           Ваш гараж
           {cars.map((car, index) => (
             <div className={style.car} id={index}>{`Марка : ${car.mark} , год выпуска : ${car.year}`}</div>

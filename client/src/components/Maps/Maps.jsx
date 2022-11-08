@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-array-index-key */
@@ -64,10 +65,10 @@ function Maps(props) {
         const geocoder = new google.maps.Geocoder();
         const originResults = await geocoder.geocode({ location: points[points.length - 1] });
         setAddress([...address,
-          {
-            place_id: originResults.results[0].place_id,
-            title: originResults.results[0].formatted_address,
-          },
+        {
+          place_id: originResults.results[0].place_id,
+          title: originResults.results[0].formatted_address,
+        },
         ]);
       }());
     }

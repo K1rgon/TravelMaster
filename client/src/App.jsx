@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import { Routes, Route, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import Video from './components/Video/Video';
 import Main from './pages/main/Main';
 import Profile from './pages/profile/Profile';
@@ -10,22 +10,11 @@ import RegisterPage from './pages/register/Register';
 import Routers from './pages/routes/Routes';
 import PersonalRoutes from './pages/routes/PersonalRoutes';
 import Maps from './components/Maps/Maps';
-import { check } from './store/user/actions';
 import RoutePage from './pages/routes/RoutePage';
 
 function App() {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    (async function getUser() {
-      const res = await fetch('http://localhost:5000/user/check', {
-        method: 'GET',
-        credentials: 'include',
-      });
-      const toJson = await res.json();
-      dispatch(check(toJson));
-    }());
-  }, []);
+  console.log(user.login);
 
   return (
     <div>

@@ -18,7 +18,9 @@ router.route('/signup')
         });
         req.session.userId = newUser.id;
         req.session.userLogin = newUser.login;
-        res.json({ login: newUser.login });
+        res.json({
+          login: user.login, email: user.email, id: user.id, foto: user.foto, name, surname,
+        });
       }
     } catch (error) {
       console.log('Signup err', error);
@@ -35,9 +37,13 @@ router.route('/signin')
         if (checkPass) {
           req.session.userSession = { id: user.id, email: user.email };
           req.session.userLogin = user.login;
-          console.log(user);
           res.json({
-            login: user.login, email: user.email, id: user.id, foto: user.foto,
+            login: user.login,
+            email: user.email,
+            id: user.id,
+            foto: user.foto,
+            name: user.name,
+            surname: user.surname,
           });
         } else {
           res.status(400).json('Email или пароль введены не верно.');
@@ -52,12 +58,6 @@ router.get('/logout', async (req, res) => {
   req.session.destroy();
   res.clearCookie('TravelMaster');
   res.sendStatus(200);
-});
-
-router.get('/check', (req, res) => {
-  const { userId, userLogin } = req.session;
-  res.json({ login: userLogin, id: userId });
-  res.end();
 });
 
 router.post('/update', async (req, res) => {
