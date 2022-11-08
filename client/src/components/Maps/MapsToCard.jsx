@@ -61,6 +61,8 @@ function MapsToCard(props) {
   const originRef = useRef();
   const destiantionRef = useRef();
 
+  console.log(address);
+
   // Функционал поиска отелей поблизости
   let service;
 
@@ -79,8 +81,9 @@ function MapsToCard(props) {
   }
 
   function getHotels() {
-    const lat = JSON.stringify(points[points.length - 1].toJSON().lat);
-    const lng = JSON.stringify(points[points.length - 1].toJSON().lng);
+    const lat = JSON.stringify(address[0].geo.toJSON().lat);
+    const lng = JSON.stringify(address[0].geo.toJSON().lng);
+
     const pyrmont = new google.maps.LatLng(lat, lng);
 
     const request = {
@@ -95,19 +98,18 @@ function MapsToCard(props) {
 
   // Функция геокодера
   useEffect(() => {
-    if (points.length) {
+    if (props.points.length) {
       (async function geocodeLatLng() {
         const geocoder = new google.maps.Geocoder();
-        const originResults = await geocoder.geocode({ location: points[points.length - 1] });
+        const originResults = await geocoder.geocode({ placeId: props.points[props.points.length - 1] });
         setAddress([...address,
           {
-            place_id: originResults.results[0].place_id,
-            title: originResults.results[0].formatted_address,
+            geo: originResults.results[0].geometry.location,
           },
         ]);
       }());
     }
-  }, [points]);
+  }, [props]);
 
   // Функция рассчета маршрута
 
