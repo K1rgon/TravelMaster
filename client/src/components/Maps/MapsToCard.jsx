@@ -209,24 +209,24 @@ function MapsToCard(props) {
               </Map>
             </Box>
             <Box
-              p={4}
+              p={0}
               border="none"
-              m={4}
+              m={5}
               bgColor="none"
               shadow="base"
-              minW="container.md"
+              minW="300px"
               zIndex="1"
               height="1px"
               width="1px"
             >
-              <HStack spacing={2} justifyContent="space-between">
-                <Box flexGrow={1} right="150px">
+              <HStack spacing={1} justifyContent="center">
+                <Box flexGrow={1}>
                   <Autocomplete>
                     <Input
                       type="text"
                       placeholder="Origin"
                       ref={originRef}
-                      right="150px"
+                      maxW="300px"
                     />
                   </Autocomplete>
                 </Box>
@@ -236,20 +236,19 @@ function MapsToCard(props) {
                       type="text"
                       placeholder="Destination"
                       ref={destiantionRef}
-                      right="150px"
+                      maxW="300px"
                     />
                   </Autocomplete>
                 </Box>
 
                 <ButtonGroup backgroundColor="none">
-                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={calculateRoute} right="150px">
+                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={calculateRoute}>
                     Calculate Route
                   </Button>
-                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={getHotels} right="150px">
+                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={getHotels}>
                     Get Hotels
                   </Button>
                   <IconButton
-                    right="150px"
                     aria-label="center back"
                     icon={<FaTimes />}
                     onClick={clearRoute}
