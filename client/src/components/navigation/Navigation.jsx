@@ -10,7 +10,7 @@ export default function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
-    const res = await fetch('http://localhost:3001/user/logout', {
+    await fetch('http://localhost:5000/user/logout', {
       method: 'GET',
       credentials: 'include',
       headers: {

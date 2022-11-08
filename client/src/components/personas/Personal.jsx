@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import style from './Personal.module.css';
@@ -7,7 +7,11 @@ import image from '../../image/user.png';
 export default function Personal() {
   const user = useSelector((store) => store.user);
   const [userInfo, setUser] = useState(user);
-  console.log(user);
+  const [isShow, setIsShow] = useState(false);
+  const [carInfo, setCarInfo] = useState({
+    brand: '', model: '', year: '', fuel: '',
+  });
+  const [allCars, setAllCars] = useState([]);
 
   const updateUser = async (data) => {
     const res = await fetch('http://localhost:3001/user/update', {
@@ -24,6 +28,19 @@ export default function Personal() {
     const toJson = await res.json();
   };
 
+  const getCars = async () => {
+    const res = await fetch('http://localhost:3001/car/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...carInfo, id: user.id }),
+    });
+    const toJson = await res.json();
+    console.log(toJson);
+    setAllCars(toJson);
+  };
+
   // mok datas ===========================
 
   const routes = [{ start: '123', end: '321', id: 34 }, { start: '1234', end: '4321', id: 24 }];
@@ -31,6 +48,21 @@ export default function Personal() {
   // ======================================
 
   const trigerInput = () => document.querySelector('#imageFile').click();
+
+  const formNewCarHandler = (e) => {
+    setCarInfo((preMy) => ({ ...preMy, [e.target.name]: e.target.value }));
+  };
+
+  const formPostHandler = (e) => {
+    e.preventDefault();
+    getCars();
+    setIsShow(false);
+    console.log(carInfo);
+  };
+
+  useEffect(() => {
+    getCars();
+  }, []);
 
   const inputFotoHandler = (e) => {
     const { files } = e.target;
@@ -68,10 +100,26 @@ export default function Personal() {
           ))}
         </div>
         <div className={style.cars}>
-          Ваш гараж
-          {cars.map((car, index) => (
-            <div className={style.car} id={index}>{`Марка : ${car.mark} , год выпуска : ${car.year}`}</div>
-          ))}
+          <p>Ваш гараж</p>
+          <button type="button" onClick={() => setIsShow(!isShow)}>Добавить новую машину</button>
+          {isShow
+            ? (
+              <form method="POST" id="form">
+                <input onChange={(e) => formNewCarHandler(e)} placeholder="Бренд" type="text" id="brand" name="brand" />
+                <input onChange={(e) => formNewCarHandler(e)} placeholder="Модель" type="text" id="model" name="model" />
+                <input onChange={(e) => formNewCarHandler(e)} placeholder="Год выпуска" type="text" id="year" name="year" />
+                <input onChange={(e) => formNewCarHandler(e)} placeholder="Расход топлива" type="text" id="fuel" name="fuel" />
+                <button onClick={(e) => formPostHandler(e)} type="submit" form="form">Сохранить новую машину</button>
+              </form>
+            )
+            : (
+              <>
+                {allCars.map((car, index) => (
+                  <div className={style.car} id={index}>{`Марка : ${car.brand} Модель: ${car.model} , год выпуска : ${car.year}`}</div>
+                ))}
+              </>
+            )}
+
         </div>
       </div>
     </div>

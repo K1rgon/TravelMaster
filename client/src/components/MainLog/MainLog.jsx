@@ -1,5 +1,4 @@
 import React from 'react';
-import Navigation from '../navigation/Navigation';
 import Video from '../Video/Video';
 import style from './Main.module.css';
 

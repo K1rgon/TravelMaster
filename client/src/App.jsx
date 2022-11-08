@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { Routes, Route, Redirect } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import Video from './components/Video/Video';
 import Main from './pages/main/Main';
@@ -10,8 +10,8 @@ import RegisterPage from './pages/register/Register';
 import Routers from './pages/routes/Routes';
 import PersonalRoutes from './pages/routes/PersonalRoutes';
 import Maps from './components/Maps/Maps';
-import { check } from './store/user/actions';
 import RoutePage from './pages/routes/RoutePage';
+import { check } from './store/user/actions';
 
 function App() {
   const user = useSelector((state) => state.user);
