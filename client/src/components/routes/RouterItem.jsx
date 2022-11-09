@@ -90,7 +90,7 @@ export default function RouterItem({ id }) {
               <p>{oneRoute.title}</p>
             </div>
             <div className="input_group">
-              <h1>
+              <h1 className="title">
                 Описание маршрута:
               </h1>
               <p>{oneRoute.description}</p>
