@@ -16,14 +16,18 @@ export default function UserRoutes() {
   }, []);
   return (
     <>
-      <button className="open-btn" type="submit" onClick={() => setModalActive(true)}>Создать маршрут</button>
+      <div className="create-btn">
+        <button className="btn" type="submit" onClick={() => setModalActive(true)}><span>Добавить маршрут</span></button>
+      </div>
       <MyModal active={modalActive} onHide={() => setModalActive(false)} />
-      <div className="card">
+      <div className="card-list">
         {
         routes.length > 0
-          ? routes.map((el) => <OneRoute key={el.id} route={el} />)
+          ? routes.map((el) => (
+            <OneRoute key={el.id} route={el} />
+          ))
           : 'Здесь будут ваши маршруты'
-      }
+            }
       </div>
     </>
   );
