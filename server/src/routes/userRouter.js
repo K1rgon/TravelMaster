@@ -57,7 +57,6 @@ router.route('/signin')
             surname: user.surname,
           };
           req.session.userLogin = user.login;
-          console.log(user);
           res.json({
             login: user.login,
             email: user.email,

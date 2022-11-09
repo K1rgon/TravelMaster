@@ -68,7 +68,6 @@ export default function MyModal({ active, onHide }) {
         <div className="maps">
           <Maps sizeMap={sizeMap} address={address} setAddress={setAddress} />
         </div>
-        
         <div className="input_group">
           <input
             onChange={(e) => inputHandler(e)}

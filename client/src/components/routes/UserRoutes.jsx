@@ -16,7 +16,7 @@ export default function UserRoutes() {
   }, []);
   return (
     <>
-      <button className="open-btn" type="submit" onClick={() => setModalActive(true)}>Моя модалочка</button>
+      <button className="open-btn" type="submit" onClick={() => setModalActive(true)}>Создать маршрут</button>
       <MyModal active={modalActive} onHide={() => setModalActive(false)} />
       <div className="card">
         {
