@@ -81,13 +81,17 @@ router.get('/logout', async (req, res) => {
 });
 
 router.get('/check', (req, res) => {
-  const {
-    id, login, email, foto, name, surname,
-  } = req.session.userSession;
-  res.json({
-    id, login, email, foto, name, surname,
-  });
-  res.end();
+  try {
+    const {
+      id, login, email, foto, name, surname,
+    } = req.session.userSession;
+    res.json({
+      id, login, email, foto, name, surname,
+    });
+    res.end();
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.post('/update', async (req, res) => {

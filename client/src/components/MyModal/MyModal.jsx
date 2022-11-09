@@ -52,7 +52,9 @@ export default function MyModal({ active, onHide }) {
     const toJson = await res.json();
     dispatch(newRoute(toJson));
     setAddress([]);
-    setRoute({});
+    setRoute({
+      title: '', description: '', date_start: '', photo: '',
+    });
     onHide();
   };
 
@@ -69,15 +71,11 @@ export default function MyModal({ active, onHide }) {
           <Maps sizeMap={sizeMap} address={address} setAddress={setAddress} />
         </div>
         <div className="input_group">
-          <input
-            onChange={(e) => inputHandler(e)}
-            type="text"
-            name="title"
-          />
+          <input onChange={(e) => inputHandler(e)} type="text" name="title" required />
           <label>Название маршрута</label>
         </div>
         <div className="input_group">
-          <input onChange={(e) => inputHandler(e)} type="text" name="description" />
+          <input onChange={(e) => inputHandler(e)} type="text" name="description" required />
           <label>Описание маршрута</label>
         </div>
         <div className="input_group">
@@ -86,7 +84,7 @@ export default function MyModal({ active, onHide }) {
         <div className="input_group">
           <input onChange={(e) => inputFotoHandler(e)} type="file" id="file" name="photo" placeholder="Загрузите фото" accept="image/*" />
         </div>
-        <button onClick={addRoute} type="submit">Send</button>
+        <button className="btn" onClick={addRoute} type="submit"><span>Создать</span></button>
       </div>
     </div>
   );

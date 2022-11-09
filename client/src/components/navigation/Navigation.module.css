@@ -5,6 +5,9 @@
   justify-content: space-between;
   padding: 20px;
   background-color: rgb(250, 177, 93);
+  /* background-color: #1d5205; */
+  /* background-color: #0c750b; */
+  /* background-color: #579656; */
 }
 .logo {
   font-size: 28px;
@@ -22,5 +25,5 @@
 }
 .link:hover {
   scale: 1.1;
-  color: black;
+  color: grey;
 }

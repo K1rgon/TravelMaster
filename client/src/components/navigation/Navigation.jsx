@@ -10,7 +10,7 @@ export default function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
-    await fetch('http://localhost:5000/user/logout', {
+    await fetch('http://localhost:3001/user/logout', {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -43,9 +43,6 @@ export default function Navigation() {
               </li>
               <li>
                 <Link className={style.link} to="/profile">Личный кабинет</Link>
-              </li>
-              <li>
-                <Link className={style.link} to="/map">Карта</Link>
               </li>
               <li>
                 <Link className={style.link} onClick={handleLogout} to="/logout">Выйти</Link>

@@ -4,9 +4,9 @@ const { Route } = require('../db/models');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const allRoutes = await Route.findAll()
-  res.json(allRoutes)
-})
+  const allRoutes = await Route.findAll();
+  res.status(200).json(allRoutes);
+});
 
 router.post('/add', async (req, res) => {
   try {
@@ -36,25 +36,30 @@ router.post('/myroutes', async (req, res) => {
     console.log(error);
   }
 });
-// http://localhost:3001/api/v1/routes/route/4 
+// http://localhost:3001/api/v1/routes/route/4
 
 router.route('/route/:id')
   .get(async (req, res) => {
     try {
       const { id } = req.params;
-      const route = await Route.findByPk(id)
-      res.status(200).json(route)
+      const route = await Route.findByPk(id);
+      res.status(200).json(route);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   })
   .patch(async (req, res) => {
     try {
       const { id } = req.params;
-      const { title, description, done, foto, date_start, private, rating } = req.body
-      const route = await Route.findByPk(id)
-      const changeRoute = await route.update({ title, description, done, foto, date_start, private, rating })
-      res.json(changeRoute)
+      const {
+        title, description, done, foto, date_start, date_finish, rating,
+      } = req.body;
+      const privateRoute = req.body.private;
+      const route = await Route.findByPk(id);
+      const changeRoute = await route.update({
+        title, description, done, foto, date_start, date_finish, private: privateRoute, rating,
+      });
+      res.json(changeRoute);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +70,7 @@ router.route('/route/:id')
       await Route.destroy({ where: { id } });
       res.sendStatus(201);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   });
 
