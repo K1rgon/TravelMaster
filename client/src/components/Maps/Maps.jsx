@@ -195,12 +195,12 @@ function Maps(props) {
                 onClick={onClick}
                 onRightClick={onRightClick}
                 mapContainerStyle={{ width: props.sizeMap.widthMap, height: props.sizeMap.heightMap }}
-                options={{
-                  zoomControl: false,
-                  streetViewControl: false,
-                  mapTypeControl: false,
-                  fullscreenControl: false,
-                }}
+                // options={{
+                //   zoomControl: false,
+                //   streetViewControl: false,
+                //   mapTypeControl: false,
+                //   fullscreenControl: false,
+                // }}
                 onLoad={(map) => setMap(map)}
               >
                 {points.map((latLng, i) => (

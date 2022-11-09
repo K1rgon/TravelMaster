@@ -12,6 +12,7 @@ import PersonalRoutes from './pages/routes/PersonalRoutes';
 import Maps from './components/Maps/Maps';
 import RoutePage from './pages/routes/RoutePage';
 import { check } from './store/user/actions';
+import RoutePagePublic from './pages/routes/RoutePagePublic';
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -39,6 +40,7 @@ function App() {
             <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
             <Route path="/myroutes/:id" element={<RoutePage />} />
+            <Route path="/publicroutes/:id" element={<RoutePagePublic />} />
           </Routes>
         )
         : (
@@ -49,6 +51,7 @@ function App() {
             <Route path="/routes" element={<Routers />} />
             <Route path="/map" element={<Maps />} />
             <Route path="/routes/:id" element={<RoutePage />} />
+            <Route path="/publicroutes/:id" element={<RoutePagePublic />} />
           </Routes>
         )}
     </div>

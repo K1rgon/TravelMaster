@@ -1,0 +1,9 @@
+.routesBlock {
+  margin: 0 auto;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: 100px;
+}
