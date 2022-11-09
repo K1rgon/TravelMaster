@@ -74,6 +74,7 @@ export default function Personal() {
       };
       reader.readAsDataURL(files[0]);
     } else {
+      // eslint-disable-next-line no-alert
       alert('Выбирите файл другово типа');
     }
   };
