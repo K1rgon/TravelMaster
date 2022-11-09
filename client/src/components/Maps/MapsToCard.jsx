@@ -181,10 +181,12 @@ function MapsToCard(props) {
             position="relative"
             flexDirection="column"
             alignItems="center"
+            margin="auto"
+            top="0"
             h={props.sizeMap.heightMap}
             w={props.sizeMap.widthMap}
           >
-            <Box position="absolute" left={0} top={0} h={props.sizeMap.heightMap} w={props.sizeMap.widthMap}>
+            <Box position="absolute" left={0} top="15px" h={props.sizeMap.heightMap} w={props.sizeMap.widthMap}>
               {/* Google Map Box */}
               <Map
                 center={center}
@@ -219,7 +221,7 @@ function MapsToCard(props) {
               height="1px"
               width="1px"
             >
-              <HStack spacing={2} justifyContent="space-between">
+              <HStack spacing={2} justifyContent="space-between" display="none">
                 <Box flexGrow={1} right="150px">
                   <Autocomplete>
                     <Input
@@ -256,7 +258,7 @@ function MapsToCard(props) {
                   />
                 </ButtonGroup>
               </HStack>
-              <HStack spacing={4} mt={4} justifyContent="space-between" backgroundColor="rgb(250, 177, 93)" borderRadius="10px">
+              <HStack spacing={4} mt={4} padding="10px" justifyContent="space-between" backgroundColor="rgb(250, 177, 93)" borderRadius="10px">
                 <Text>
                   Distance:
                   {' '}

@@ -3,9 +3,9 @@ const { Route } = require('../db/models');
 
 const router = express.Router();
 
-router.get('/', async (req,res)=>{
-    const allRoutes = await Route.findAll()
-    res.status(200).json(allRoutes)
+router.get('/', async (req, res) => {
+  const allRoutes = await Route.findAll()
+  res.json(allRoutes)
 })
 
 router.post('/add', async (req, res) => {
@@ -39,7 +39,7 @@ router.post('/myroutes', async (req, res) => {
 // http://localhost:3001/api/v1/routes/route/4 
 
 router.route('/route/:id')
-  .get(async(req,res)=>{
+  .get(async (req, res) => {
     try {
       const { id } = req.params;
       const route = await Route.findByPk(id)
@@ -51,9 +51,9 @@ router.route('/route/:id')
   .patch(async (req, res) => {
     try {
       const { id } = req.params;
-      const {title, description, done, foto, date_start, private, rating} = req.body
+      const { title, description, done, foto, date_start, private, rating } = req.body
       const route = await Route.findByPk(id)
-      const changeRoute = await route.update({title, description, done, foto, date_start, private, rating})
+      const changeRoute = await route.update({ title, description, done, foto, date_start, private, rating })
       res.json(changeRoute)
     } catch (error) {
       console.log(error);
@@ -65,8 +65,8 @@ router.route('/route/:id')
       await Route.destroy({ where: { id } });
       res.sendStatus(201);
     } catch (error) {
-        console.log (error)
+      console.log(error)
     }
   });
 
-  module.exports = router;
+module.exports = router;
