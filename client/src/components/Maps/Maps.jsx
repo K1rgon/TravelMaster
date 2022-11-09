@@ -106,6 +106,12 @@ function Maps(props) {
             title: originResults.results[0].formatted_address,
           },
         ]);
+        if (points.length === 1) {
+          originRef.current.placeholder = originResults.results[6].formatted_address;
+        }
+        if (points.length > 1) {
+          destiantionRef.current.placeholder = originResults.results[6].formatted_address;
+        }
       }());
     }
   }, [points]);
@@ -206,8 +212,6 @@ function Maps(props) {
               </Map>
             </Box>
             <Box
-              position="absolute"
-              p={0}
               border="none"
               m={4}
               bgColor="none"
@@ -221,6 +225,7 @@ function Maps(props) {
                 <Box flexGrow={1} right="150px">
                   <Autocomplete>
                     <Input
+                      style={{ backgroundColor: '#e7ecf2' }}
                       type="text"
                       placeholder="Origin"
                       ref={originRef}
@@ -231,6 +236,7 @@ function Maps(props) {
                 <Box flexGrow={1}>
                   <Autocomplete>
                     <Input
+                      style={{ backgroundColor: '#e7ecf2' }}
                       type="text"
                       placeholder="Destination"
                       ref={destiantionRef}

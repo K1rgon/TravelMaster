@@ -61,8 +61,6 @@ function MapsToCard(props) {
   const originRef = useRef();
   const destiantionRef = useRef();
 
-  console.log(address);
-
   // Функционал поиска отелей поблизости
   let service;
 
