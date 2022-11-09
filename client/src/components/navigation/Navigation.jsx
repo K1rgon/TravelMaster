@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,10 +23,14 @@ export default function Navigation() {
     navigate('/');
   };
 
+  function goHome() {
+    navigate('/');
+  }
+
   return (
     <div className={style.navigation}>
       <div className={style.logo}>
-        TRAVELMASTER
+        <img onClick={() => goHome()} role="button" tabIndex={0} src="/img/logo.png" alt="logo" style={{ height: '120px' }} />
       </div>
       <div>
         {user.login
