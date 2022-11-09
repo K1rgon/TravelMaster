@@ -206,7 +206,8 @@ function Maps(props) {
               </Map>
             </Box>
             <Box
-              p={4}
+              position="absolute"
+              p={0}
               border="none"
               m={4}
               bgColor="none"
