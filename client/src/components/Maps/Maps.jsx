@@ -157,7 +157,6 @@ function Maps(props) {
       setDuration(results.routes[0].legs[0].duration.text);
     }
   }
-
   // Функция сброса маршрута
 
   function clearRoute() {
@@ -165,8 +164,11 @@ function Maps(props) {
     setDistance('');
     setDuration('');
     setPoints([]);
+    props.setAddress([]);
     originRef.current.value = '';
     destiantionRef.current.value = '';
+    originRef.current.placeholder = 'Пункт отправления';
+    destiantionRef.current.placeholder = 'Пункт назначения';
   }
 
   // Функция установки маркеров на карте
@@ -179,7 +181,15 @@ function Maps(props) {
 
   function onRightClick() {
     setPoints([...points.filter((el, i) => i !== points.length - 1)]);
+    if (props.address.length >= 0 && props.address.length <= 2) {
+      props.setAddress([]);
+    } if (props.address.length > 2) {
+      props.setAddress([...props.address.slice([0], [-2])]);
+    }
+
+    console.log('2', props.address);
   }
+  console.log('1', props.address);
 
   return (
     <>
@@ -235,7 +245,7 @@ function Maps(props) {
                       type="text"
                       placeholder="Origin"
                       ref={originRef}
-                      right="150px"
+                      // right="150px"
                     />
                   </Autocomplete>
                 </Box>
@@ -246,20 +256,20 @@ function Maps(props) {
                       type="text"
                       placeholder="Destination"
                       ref={destiantionRef}
-                      right="150px"
+                      // right="150px"
                     />
                   </Autocomplete>
                 </Box>
 
                 <ButtonGroup backgroundColor="none">
-                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={calculateRoute} right="150px">
+                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={calculateRoute}>
                     Calculate Route
                   </Button>
-                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={getHotels} right="150px">
+                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={getHotels}>
                     Get Hotels
                   </Button>
                   <IconButton
-                    right="150px"
+                    // right="150px"
                     aria-label="center back"
                     icon={<FaTimes />}
                     onClick={clearRoute}

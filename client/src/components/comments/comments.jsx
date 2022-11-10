@@ -44,12 +44,13 @@ export default function Comments({ id }) {
     <div className={style.box}>
       <div className={style.commentlist}>
         {commentList.length
-          ? commentList.map((comment) => (<div className={style.item} key={comment.id}>{`Пользователь ${comment.user_id} написал: ${comment.text}`}</div>))
+          ? <div className={style.comments}>{commentList.map((comment) => (<div className={style.item} key={comment.id}>{`${comment.text}`}</div>))}</div>
           : <div>коментов нет</div>}
       </div>
       {user.login
         ? (
           <div className={style.blockmMessage}>
+            <p>Оставить коментарий</p>
             <input onChange={(e) => messageHandler(e)} name="text" type="text" placeholder="Введите текст комментария" />
             <button type="submit" onClick={(e) => sendMessage(e)} className={style.button}>Отправить</button>
           </div>

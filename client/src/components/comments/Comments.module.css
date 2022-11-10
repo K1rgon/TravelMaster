@@ -35,3 +35,7 @@
 .button:hover {
   scale: 1.1;
 }
+.comments {
+  background-color: rgb(240, 236, 236);
+  border-radius: 9px;
+}
