@@ -28,10 +28,10 @@ export default function Comments({ id }) {
   useEffect(() => {
     getComments();
   }, []);
+  console.log(commentList);
 
   const messageHandler = (e) => {
     setMessage((prev) => ({ ...prev, [e.target.name]: e.target.value, user_id: user.id }));
-    console.log(message);
   };
 
   const sendMessage = (e) => {
@@ -44,18 +44,28 @@ export default function Comments({ id }) {
     <div className={style.box}>
       <div className={style.commentlist}>
         {commentList.length
-          ? <div className={style.comments}>{commentList.map((comment) => (<div className={style.item} key={comment.id}>{`${comment.text}`}</div>))}</div>
-          : <div>коментов нет</div>}
+          ? (
+            <div className={style.comments}>
+              {commentList.map((comment) => (
+                <div className={style.item} key={comment.id}>
+                  {`${comment.User.login} ${new Date(comment.createdAt).toLocaleString()}`}
+                  <br />
+                  {comment.text}
+                </div>
+              ))}
+            </div>
+          )
+          : <div>К этой поездке еще не никто не оставил комментарий</div>}
       </div>
       {user.login
         ? (
           <div className={style.blockmMessage}>
             <p>Оставить коментарий</p>
             <input onChange={(e) => messageHandler(e)} name="text" type="text" placeholder="Введите текст комментария" />
-            <button type="submit" onClick={(e) => sendMessage(e)} className={style.button}>Отправить</button>
+            <button type="submit" onClick={(e) => sendMessage(e)} className={style.btn}><span>Отправить</span></button>
           </div>
         )
-        : <div>register or login and you can commented</div>}
+        : <div>Для того чтобы оставить комментарий нужно авторизоваться</div>}
     </div>
   );
 }

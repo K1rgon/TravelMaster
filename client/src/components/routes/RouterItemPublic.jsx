@@ -19,7 +19,7 @@ export default function RouterItemPublick({ id }) {
   }, []);
 
   const sizeMap = {
-    widthMap: '85vw',
+    widthMap: '100vw',
     heightMap: '55vh',
     widthInput: '85vw',
     heightInput: '55vh',
