@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
@@ -10,12 +9,16 @@ const PORT = process.env.PORT || 3001;
 
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-
+const userRouter = require('./routes/userRouter');
+const routeRouter = require('./routes/routeRouter');
+const autoRouter = require('./routes/carRouter');
+const commentRouter = require('./routes/commentRouter');
 
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(express.json());
+app.use(express.json({ limit: '10mb', extended: true }));
+app.use(express.urlencoded({ limit: '10mb', extended: true, parameterLimit: 50000 }));
 
 const sessionConfig = {
   name: 'TravelMaster',
@@ -30,5 +33,10 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+
+app.use('/user', userRouter);
+app.use('/api/v1/routes', routeRouter);
+app.use('/car', autoRouter);
+app.use('/comments', commentRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

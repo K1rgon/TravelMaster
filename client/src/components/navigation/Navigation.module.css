@@ -1,0 +1,28 @@
+.navigation {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 40px 0px 40px;
+  background-color: rgb(250, 177, 93);
+  /* background-color: #1d5205; */
+  /* background-color: #0c750b; */
+  /* background-color: #579656; */
+}
+.logoImg {
+  height: 60px;
+}
+.links {
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+}
+.link {
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.5s;
+  color: black;
+}
+.link:hover {
+  color: grey;
+}
