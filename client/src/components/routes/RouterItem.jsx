@@ -53,20 +53,20 @@ export default function RouterItem({ id }) {
         ? (
           <div className="container">
             <div className="input_group">
-              <p>
+              <p className="title">
                 Название маршрута:
               </p>
               <input type="text" name="title" value={oneRoute.title} onChange={inputHandler} />
-              <p>
+              <p className="title">
                 Описание маршрута:
               </p>
               <input type="text" name="description" value={oneRoute.description} onChange={inputHandler} />
-              <div className="box">
-                <p>Можно ли другим пользователям видеть ваш маршрут?</p>
+              <div className="input_group">
+                <p className="title">Можно ли другим пользователям видеть ваш маршрут?</p>
                 <input type="checkbox" name="private" onChange={inputHandler} />
               </div>
               <div>
-                <p>Дата начала поездки:</p>
+                <p className="title">Дата начала поездки:</p>
                 <input type="date" name="date_start" value={oneRoute.date_start} onChange={inputHandler} />
               </div>
               {/* <div className="box">
@@ -74,17 +74,21 @@ export default function RouterItem({ id }) {
               <input type="checkbox" name="done" value={oneRoute.done} onChange={inputHandler} />
             </div> */}
               <div>
-                <p>Установите дату окончания поездки</p>
+                <p className="title">Установите дату окончания поездки</p>
                 <input type="date" name="date_finish" value={oneRoute.date_finish} onChange={inputHandler} min={oneRoute.date_start} />
               </div>
               <button className="btn" onClick={() => clickHandler(oneRoute.id)} type="submit"><span>Подтвердить изменения</span></button>
+            </div>
+            <div className="input_group">
+              <h1>комментарии</h1>
+              <input type="text" />
             </div>
           </div>
         ) : (
           <div className="container">
             <button className="btn" type="submit" onClick={() => setEdit(true)}><span>Редактировать</span></button>
             <div className="input_group">
-              <h1>
+              <h1 className="title">
                 Название маршрута:
               </h1>
               <p>{oneRoute.title}</p>
@@ -96,11 +100,11 @@ export default function RouterItem({ id }) {
               <p>{oneRoute.description}</p>
             </div>
             <div className="input_group">
-              <h1>Можно ли другим пользователям видеть ваш маршрут?</h1>
-              <input type="checkbox" name="private" value={oneRoute.private} disabled />
+              <h1 className="title">Можно ли другим пользователям видеть ваш маршрут?</h1>
+              <input type="checkbox" name="private" value={oneRoute.private} checked="checked" disabled />
             </div>
             <div className="input_group">
-              <h1>Дата начала поездки:</h1>
+              <h1 className="title">Дата начала поездки:</h1>
               <input type="date" className="bdate" name="date_start" value={oneRoute.date_start} disabled />
             </div>
             {/* <div className="box">
@@ -108,8 +112,12 @@ export default function RouterItem({ id }) {
               <input type="checkbox" name="done" value={oneRoute.done} disabled />
             </div> */}
             <div className="input_group">
-              <h1>Дата окончания поездки</h1>
+              <h1 className="title">Дата окончания поездки</h1>
               <input type="date" className="bdate" name="date_finish" value={oneRoute.date_finish} disabled />
+            </div>
+            <div className="input_group">
+              <h1>комментарии</h1>
+              <input type="text" />
             </div>
           </div>
         )}

@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../store/user/actions';
+import './login.css';
 
 export default function Login() {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -37,26 +37,19 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <Form className="w-25 align-items-center m-auto pt-5">
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control onChange={(e) => handleStateUser(e)} type="email" placeholder="Enter email" name="email" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control onChange={(e) => handleStateUser(e)} type="password" placeholder="Password" name="password" />
-        </Form.Group>
-
-        <Button onClick={(e) => handlerBtn(e)} variant="primary" type="submit">
-          Submit
-        </Button>
-        <Button className="m-3" onClick={() => navigate('/register')} variant="primary" type="submit">
-          Register
-        </Button>
-      </Form>
+    <div className="block">
+      <div className="input_group">
+        <input onChange={(e) => handleStateUser(e)} type="email" name="email" required />
+        <label>Ваш email</label>
+      </div>
+      <div className="input_group">
+        <input onChange={(e) => handleStateUser(e)} type="password" name="password" required />
+        <label>Ваш пароль</label>
+      </div>
+      <div className="input_group">
+        <button className="btn" onClick={(e) => handlerBtn(e)} type="submit"><span>Войти</span></button>
+        <button className="btn" onClick={() => navigate('/register')} type="submit"><span>Регистрация</span></button>
+      </div>
     </div>
   );
 }
