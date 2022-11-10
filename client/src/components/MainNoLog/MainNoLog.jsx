@@ -10,7 +10,7 @@ export default function MainNoLog() {
         <Video />
       </div>
       <div className={style.buttons}>
-        <Link className={style.ghost} to="/routes">Популярные маршруты</Link>
+        <Link className={style.ghost} to="/routes">Публичные маршруты</Link>
         <Link className={style.ghost} to="/login">Войти</Link>
       </div>
     </div>
