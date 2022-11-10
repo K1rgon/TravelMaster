@@ -71,11 +71,11 @@ export default function MyModal({ active, onHide }) {
           <Maps sizeMap={sizeMap} address={address} setAddress={setAddress} />
         </div>
         <div className="input_group">
-          <input onChange={(e) => inputHandler(e)} type="text" name="title" required />
+          <input onChange={(e) => inputHandler(e)} className="standart" type="text" name="title" required />
           <label>Название маршрута</label>
         </div>
         <div className="input_group">
-          <input onChange={(e) => inputHandler(e)} type="text" name="description" required />
+          <input onChange={(e) => inputHandler(e)} className="standart" type="text" name="description" required />
           <label>Описание маршрута</label>
         </div>
         <div className="input_group">

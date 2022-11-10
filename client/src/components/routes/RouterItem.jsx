@@ -56,11 +56,11 @@ export default function RouterItem({ id }) {
               <p className="title">
                 Название маршрута:
               </p>
-              <input type="text" name="title" value={oneRoute.title} onChange={inputHandler} />
+              <input type="text" className="standart" name="title" value={oneRoute.title} onChange={inputHandler} />
               <p className="title">
                 Описание маршрута:
               </p>
-              <input type="text" name="description" value={oneRoute.description} onChange={inputHandler} />
+              <input type="text" className="standart" name="description" value={oneRoute.description} onChange={inputHandler} />
               <div className="input_group">
                 <p className="title">Можно ли другим пользователям видеть ваш маршрут?</p>
                 <input type="checkbox" name="private" onChange={inputHandler} />
@@ -81,7 +81,7 @@ export default function RouterItem({ id }) {
             </div>
             <div className="input_group">
               <h1>комментарии</h1>
-              <input type="text" />
+              <input className="standart" type="text" />
             </div>
           </div>
         ) : (
