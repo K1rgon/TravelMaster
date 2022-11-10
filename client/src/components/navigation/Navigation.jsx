@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../store/user/actions';
 import style from './Navigation.module.css';
 
@@ -30,7 +30,7 @@ export default function Navigation() {
   return (
     <div className={style.navigation}>
       <div className={style.logo}>
-        <img onClick={() => goHome()} role="button" tabIndex={0} src="/img/logo.png" alt="logo" style={{ height: '120px' }} />
+        <img className={style.logoImg} onClick={() => goHome()} role="button" tabIndex={0} src="/img/logo.png" alt="logo" />
       </div>
       <div>
         {user.login
@@ -42,26 +42,81 @@ export default function Navigation() {
                 {user.login}
               </li>
               <li>
-                <Link className={style.link} to="/routes">Публичные маршруты</Link>
+                <NavLink
+                  style={({ isActive }) => ({
+                    fontSize: isActive ? '20px' : '',
+                  })}
+                  className={style.link}
+                  to="/routes"
+                >
+                  Публичные маршруты
+
+                </NavLink>
               </li>
               <li>
-                <Link className={style.link} to="/myroutes">Мои маршруты</Link>
+                <NavLink
+                  style={({ isActive }) => ({
+                    fontSize: isActive ? '20px' : '',
+                  })}
+                  className={style.link}
+                  to="/myroutes"
+                >
+                  Мои маршруты
+
+                </NavLink>
               </li>
               <li>
-                <Link className={style.link} to="/profile">Личный кабинет</Link>
+                <NavLink
+                  style={({ isActive }) => ({
+                    fontSize: isActive ? '20px' : '',
+                  })}
+                  className={style.link}
+                  to="/profile"
+                >
+                  Личный кабинет
+
+                </NavLink>
               </li>
               <li>
-                <Link className={style.link} onClick={handleLogout} to="/logout">Выйти</Link>
+                <NavLink
+                  style={({ isActive }) => ({
+                    fontSize: isActive ? '20px' : '',
+                  })}
+                  className={style.link}
+                  onClick={handleLogout}
+                  to="/logout"
+                >
+                  Выйти
+
+                </NavLink>
               </li>
             </ul>
           )
           : (
             <ul className={style.links}>
               <li>
-                <Link className={style.link} to="/routes">Публичные маршруты</Link>
+                <NavLink
+                  style={({ isActive }) => ({
+                    fontSize: isActive ? '20px' : '',
+                  })}
+                  className={style.link}
+                  to="/routes"
+                >
+                  Публичные маршруты
+
+                </NavLink>
               </li>
               <li>
-                <Link className={style.link} to="/login">Войти</Link>
+                <NavLink
+                  style={({ isActive }) => ({
+                    fontSize: isActive ? '20px' : '',
+                  })}
+                  className={style.link}
+                  to="/login"
+                >
+                  Войти
+
+                </NavLink>
               </li>
             </ul>
           )}

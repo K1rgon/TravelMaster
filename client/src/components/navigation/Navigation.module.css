@@ -3,14 +3,14 @@
   margin: 0 auto;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 0px 40px 0px 40px;
   background-color: rgb(250, 177, 93);
   /* background-color: #1d5205; */
   /* background-color: #0c750b; */
   /* background-color: #579656; */
 }
-.logo {
-  font-size: 28px;
+.logoImg {
+  height: 60px;
 }
 .links {
   list-style-type: none;
@@ -24,6 +24,5 @@
   color: black;
 }
 .link:hover {
-  scale: 1.1;
   color: grey;
 }
