@@ -3,11 +3,6 @@ const { Route } = require('../db/models');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  const allRoutes = await Route.findAll();
-  res.status(200).json(allRoutes);
-});
-
 router.post('/add', async (req, res) => {
   try {
     const newRoute = await Route.create({
@@ -27,16 +22,17 @@ router.post('/add', async (req, res) => {
   }
 });
 
-router.post('/myroutes', async (req, res) => {
+router.get('/myroutes', async (req, res) => {
   try {
-    const routesByUser = await Route
-      .findAll({ where: { user_id: req.session.userSession.id } });
+    console.log('1111111', req.session);
+    const { id } = req.session.userSession;
+    console.log('BACK', id);
+    const routesByUser = await Route.findAll({ where: { user_id: id } });
     res.status(200).json(routesByUser);
   } catch (error) {
     console.log(error);
   }
 });
-// http://localhost:3001/api/v1/routes/route/4
 
 router.route('/route/:id')
   .get(async (req, res) => {
@@ -73,5 +69,11 @@ router.route('/route/:id')
       console.log(error);
     }
   });
+
+router.get('/', async (req, res) => {
+  console.log('Public', req.session);
+  const allRoutes = await Route.findAll();
+  res.status(200).json(allRoutes);
+});
 
 module.exports = router;

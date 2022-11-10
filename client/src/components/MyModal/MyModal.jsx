@@ -79,7 +79,8 @@ export default function MyModal({ active, onHide }) {
           <label>Описание маршрута</label>
         </div>
         <div className="input_group">
-          <input onChange={(e) => inputHandler(e)} type="date" name="date_start" />
+          <input onChange={(e) => inputHandler(e)} type="date" name="date_start" required />
+          <label>Дата начала маршрута</label>
         </div>
         <div className="input_group">
           <input onChange={(e) => inputFotoHandler(e)} type="file" id="file" name="photo" placeholder="Загрузите фото" accept="image/*" />

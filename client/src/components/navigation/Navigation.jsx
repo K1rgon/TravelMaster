@@ -42,7 +42,7 @@ export default function Navigation() {
                 {user.login}
               </li>
               <li>
-                <Link className={style.link} to="/routes">Популярные маршруты</Link>
+                <Link className={style.link} to="/routes">Публичные маршруты</Link>
               </li>
               <li>
                 <Link className={style.link} to="/myroutes">Мои маршруты</Link>
@@ -58,7 +58,7 @@ export default function Navigation() {
           : (
             <ul className={style.links}>
               <li>
-                <Link className={style.link} to="/routes">Популярные маршруты</Link>
+                <Link className={style.link} to="/routes">Публичные маршруты</Link>
               </li>
               <li>
                 <Link className={style.link} to="/login">Войти</Link>

@@ -6,7 +6,6 @@ const router = express.Router();
 router
   .get('/all', async (req, res) => {
     const id = req.session.userId;
-    console.log(id);
     const allCars = await Auto.findAll({
       where: {
         user_id: id,

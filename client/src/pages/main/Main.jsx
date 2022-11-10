@@ -7,7 +7,7 @@ export default function Main() {
   const user = useSelector((state) => state.user);
   return (
     <div>
-      {user.login === true ? <MainLog /> : <MainNoLog />}
+      {user.login ? <MainLog /> : <MainNoLog />}
     </div>
   );
 }

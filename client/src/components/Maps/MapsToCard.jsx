@@ -181,8 +181,8 @@ function MapsToCard(props) {
             position="relative"
             flexDirection="column"
             alignItems="center"
-            margin="auto"
-            top="0"
+            // margin="auto"
+            // top="0"
             h={props.sizeMap.heightMap}
             w={props.sizeMap.widthMap}
           >

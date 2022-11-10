@@ -30,7 +30,7 @@ export default function Login() {
       });
       const toJson = await res.json();
       dispatch(signIn(toJson));
-      navigate('/routes');
+      navigate('/myroutes');
     } catch (error) {
       console.log(error);
     }
