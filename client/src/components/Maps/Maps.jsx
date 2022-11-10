@@ -245,7 +245,7 @@ function Maps(props) {
                       type="text"
                       placeholder="Origin"
                       ref={originRef}
-                      right="150px"
+                      // right="150px"
                     />
                   </Autocomplete>
                 </Box>
@@ -256,20 +256,20 @@ function Maps(props) {
                       type="text"
                       placeholder="Destination"
                       ref={destiantionRef}
-                      right="150px"
+                      // right="150px"
                     />
                   </Autocomplete>
                 </Box>
 
                 <ButtonGroup backgroundColor="none">
-                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={calculateRoute} right="150px">
+                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={calculateRoute}>
                     Calculate Route
                   </Button>
-                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={getHotels} right="150px">
+                  <Button backgroundColor="rgb(250, 177, 93)" type="submit" onClick={getHotels}>
                     Get Hotels
                   </Button>
                   <IconButton
-                    right="150px"
+                    // right="150px"
                     aria-label="center back"
                     icon={<FaTimes />}
                     onClick={clearRoute}
