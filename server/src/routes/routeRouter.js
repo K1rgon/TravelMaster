@@ -1,4 +1,5 @@
 const express = require('express');
+const { where } = require('sequelize');
 const { Route } = require('../db/models');
 
 const router = express.Router();
@@ -72,7 +73,11 @@ router.route('/route/:id')
 
 router.get('/', async (req, res) => {
   console.log('Public', req.session);
-  const allRoutes = await Route.findAll();
+  const allRoutes = await Route.findAll({
+    where: {
+      private: false,
+    },
+  });
   res.status(200).json(allRoutes);
 });
 
