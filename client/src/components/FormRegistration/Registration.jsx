@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../store/user/actions';
+import './registr.css';
 
 export default function Registration() {
   const [user, setUser] = useState({
@@ -38,41 +38,31 @@ export default function Registration() {
   };
 
   return (
-    <div>
-      <Form className="w-25 align-items-center m-auto pt-5">
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control onChange={(e) => handleStateUser(e)} type="email" placeholder="Enter email" name="email" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Login</Form.Label>
-          <Form.Control onChange={(e) => handleStateUser(e)} type="text" placeholder="Enter username" name="login" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>User name</Form.Label>
-          <Form.Control onChange={(e) => handleStateUser(e)} type="text" placeholder="Enter username" name="name" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>User surname</Form.Label>
-          <Form.Control onChange={(e) => handleStateUser(e)} type="text" placeholder="Enter username" name="surname" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control onChange={(e) => handleStateUser(e)} type="password" placeholder="Password" name="password" />
-        </Form.Group>
-
-        <Button onClick={(e) => handlerBtn(e)} variant="primary" type="submit">
-          Submit
-        </Button>
-        <Button className="m-3" onClick={() => navigate('/login')} variant="primary" type="submit">
-          Login
-        </Button>
-      </Form>
+    <div className="block">
+      <div className="input_group">
+        <input onChange={(e) => handleStateUser(e)} type="email" name="email" required />
+        <label>Введите email</label>
+      </div>
+      <div className="input_group">
+        <input onChange={(e) => handleStateUser(e)} type="text" name="login" required />
+        <label>Введите login</label>
+      </div>
+      <div className="input_group">
+        <input onChange={(e) => handleStateUser(e)} type="text" name="name" required />
+        <label>Введите Ваше имя</label>
+      </div>
+      <div className="input_group">
+        <input onChange={(e) => handleStateUser(e)} type="text" name="surname" required />
+        <label>Введите Вашу фамилию</label>
+      </div>
+      <div className="input_group">
+        <input onChange={(e) => handleStateUser(e)} type="password" name="password" required />
+        <label>Ваш пароль</label>
+      </div>
+      <div className="input_group">
+        <button className="btn" onClick={(e) => handlerBtn(e)} type="submit"><span>Зарегистрироваться</span></button>
+        <button className="btn" onClick={() => navigate('/login')} type="submit"><span>Войти</span></button>
+      </div>
     </div>
   );
 }
