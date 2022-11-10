@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import style from './Personal.module.css';
 import image from '../../image/user.png';
+import { routesInit } from '../../store/route/actions';
 
 export default function Personal() {
   const user = useSelector((store) => store.user);
@@ -12,7 +13,9 @@ export default function Personal() {
     brand: '', model: '', year: '', fuel: '',
   });
   const [allCars, setAllCars] = useState([]);
-
+  const dispatch = useDispatch();
+  const routes = useSelector((store) => store.route);
+  console.log(routes);
   const updateUser = async (data) => {
     const res = await fetch('http://localhost:3001/user/update', {
       method: 'POST',
@@ -37,15 +40,8 @@ export default function Personal() {
       body: JSON.stringify({ ...carInfo, id: user.id }),
     });
     const toJson = await res.json();
-    console.log(toJson);
     setAllCars(toJson);
   };
-
-  // mok datas ===========================
-
-  const routes = [{ start: '123', end: '321', id: 34 }, { start: '1234', end: '4321', id: 24 }];
-  const cars = [{ mark: 'Audi', year: '2008' }];
-  // ======================================
 
   const trigerInput = () => document.querySelector('#imageFile').click();
 
@@ -61,6 +57,7 @@ export default function Personal() {
   };
 
   useEffect(() => {
+    dispatch(routesInit());
     getCars();
   }, []);
 
@@ -97,7 +94,7 @@ export default function Personal() {
         <div className={style.routes}>
           Ваши маршруты
           {routes.map((rout, index) => (
-            <Link className={style.rout} to={`/routes/${rout.id}`} id={index}>{`Начало маршрута : ${rout.start} , конец маршрута : ${rout.end}`}</Link>
+            <Link className={style.rout} to={`/publicroutes/${rout.id}`} id={index}>{`Название маршрута : ${rout.title ? rout.title : 'Названия нет'} , статус : ${rout.done ? 'закончен' : 'незакончен'}`}</Link>
           ))}
         </div>
         <div className={style.cars}>
