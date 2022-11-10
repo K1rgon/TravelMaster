@@ -34,7 +34,7 @@ export default function Registration() {
     });
     const toJson = await res.json();
     dispatch(signIn(toJson));
-    navigate('/routes');
+    navigate('/profile');
   };
 
   return (

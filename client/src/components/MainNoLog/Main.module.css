@@ -1,36 +1,36 @@
 .main {
-  max-width: 1300px;
+  max-width: 100%;
   margin: 0 auto;
 }
-.gif {
-}
+
 .buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: auto;
-  max-width: 1300px;
   position: absolute;
   gap: 30%;
   top: 70%;
-  left: 38%;
+  left: 32%;
 }
-.btn {
-  box-sizing: content-box;
-  padding: 15px 30px;
-  font-size: 20px;
-  background-color: rgb(250, 177, 93);
-  border-radius: 7px;
-  text-decoration: none;
-  color: black;
-  transition: all 0.5s;
+
+.ghost {
+  display: inline-block;
+  width: 300px;
+  padding: 8px;
+  color: #fff;
+  border: 2px solid #fff;
   text-align: center;
-  align-items: center;
-  vertical-align: middle;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out,
+              border-color 0.2s ease-out;
 }
-.btn:hover {
-  color: black;
-  scale: 1.1;
-}
-.back {
-  
+.ghost:hover,
+.ghost:active {
+  background-color: #fff; /* fallback */
+  background-color: rgba(255, 255, 255, 0.4);
+  border-color: #fff; /* fallback */
+  border-color: rgba(255, 255, 255, 0.4);
+  transition: background-color 0.3s ease-in,
+              border-color 0.3s ease-in;
 }

@@ -4,7 +4,10 @@ import {
 
 export const routesInit = () => async (dispatch) => {
   try {
-    const res = await fetch('http://localhost:3001/api/v1/routes');
+    const res = await fetch('http://localhost:3001/api/v1/routes/myroutes', {
+      method: 'GET',
+      credentials: 'include',
+    });
     const routesFromBack = await res.json();
     dispatch({ type: INIT_ROUTE, payload: routesFromBack });
   } catch (error) {

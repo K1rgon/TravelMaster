@@ -56,7 +56,6 @@ router.route('/signin')
             name: user.name,
             surname: user.surname,
           };
-          req.session.userLogin = user.login;
           res.json({
             login: user.login,
             email: user.email,
@@ -82,6 +81,7 @@ router.get('/logout', async (req, res) => {
 
 router.get('/check', (req, res) => {
   try {
+    console.log(22222, req.session.userSession);
     const {
       id, login, email, foto, name, surname,
     } = req.session.userSession;

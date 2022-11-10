@@ -37,7 +37,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/newrout" element={<Profile />} />
             <Route path="/routes" element={<Routers />} />
-            <Route path="/map" element={<Maps />} />
             <Route path="/myroutes" element={<PersonalRoutes />} />
             <Route path="/myroutes/:id" element={<RoutePage />} />
             <Route path="/publicroutes/:id" element={<RoutePagePublic />} />
@@ -49,7 +48,6 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/routes" element={<Routers />} />
-            <Route path="/map" element={<Maps />} />
             <Route path="/routes/:id" element={<RoutePage />} />
             <Route path="/publicroutes/:id" element={<RoutePagePublic />} />
           </Routes>

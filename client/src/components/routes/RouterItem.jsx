@@ -75,7 +75,7 @@ export default function RouterItem({ id }) {
             </div> */}
               <div>
                 <p>Установите дату окончания поездки</p>
-                <input type="date" name="date_finish" value={oneRoute.date_finish} onChange={inputHandler} />
+                <input type="date" name="date_finish" value={oneRoute.date_finish} onChange={inputHandler} min={oneRoute.date_start} />
               </div>
               <button className="btn" onClick={() => clickHandler(oneRoute.id)} type="submit"><span>Подтвердить изменения</span></button>
             </div>
@@ -101,7 +101,7 @@ export default function RouterItem({ id }) {
             </div>
             <div className="input_group">
               <h1>Дата начала поездки:</h1>
-              <input type="date" name="date_start" value={oneRoute.date_start} disabled />
+              <input type="date" className="bdate" name="date_start" value={oneRoute.date_start} disabled />
             </div>
             {/* <div className="box">
               <h1>Ваша поездка завершена?</h1>
@@ -109,7 +109,7 @@ export default function RouterItem({ id }) {
             </div> */}
             <div className="input_group">
               <h1>Дата окончания поездки</h1>
-              <input type="date" name="date_finish" value={oneRoute.date_finish} disabled />
+              <input type="date" className="bdate" name="date_finish" value={oneRoute.date_finish} disabled />
             </div>
           </div>
         )}

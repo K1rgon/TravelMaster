@@ -146,6 +146,12 @@ function Maps(props) {
         destination: destiantionRef.current.value,
         travelMode: google.maps.TravelMode.DRIVING,
       });
+      props.setAddress([...props.address,
+        {
+          place_id: results.geocoded_waypoints[0].place_id,
+        },
+        { place_id: results.geocoded_waypoints[results.geocoded_waypoints.length - 1].place_id },
+      ]);
       setDirectionsResponse(results);
       setDistance(results.routes[0].legs[0].distance.text);
       setDuration(results.routes[0].legs[0].duration.text);
