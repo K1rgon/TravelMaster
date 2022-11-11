@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import Comments from '../comments/comments';
 import MapsToCard from '../Maps/MapsToCard';
 import './routerItem.css';
 
@@ -80,8 +81,8 @@ export default function RouterItem({ id }) {
               <button className="btn" onClick={() => clickHandler(oneRoute.id)} type="submit"><span>Подтвердить изменения</span></button>
             </div>
             <div className="input_group">
-              <h1>комментарии</h1>
-              <input className="standart" type="text" />
+              <h1 className="title">Комментарии</h1>
+              <Comments id={id} />
             </div>
           </div>
         ) : (
@@ -116,8 +117,8 @@ export default function RouterItem({ id }) {
               <input type="date" className="bdate" name="date_finish" value={oneRoute.date_finish} disabled />
             </div>
             <div className="input_group">
-              <h1>комментарии</h1>
-              <input type="text" />
+              <h1 className="title">Комментарии</h1>
+              <Comments id={id} />
             </div>
           </div>
         )}

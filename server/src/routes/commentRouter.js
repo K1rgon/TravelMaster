@@ -1,11 +1,10 @@
 const express = require('express');
-const { Comment } = require('../db/models');
+const { Comment, User } = require('../db/models');
 
 const router = express.Router();
 
 router.post('/', async (req, res) => {
   const { id, message } = req.body;
-  console.log(id, message);
   if (message.text !== '') {
     const newComment = await Comment.create({
       text: message.text,
@@ -18,6 +17,7 @@ router.post('/', async (req, res) => {
     where: {
       route_id: id,
     },
+    include: User,
   });
   res.json(allComment);
 });
